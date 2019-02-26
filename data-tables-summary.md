@@ -21,3 +21,4 @@ will need to keep track of user names, dates, times, possible passwords.
 #### Transform Algorithm data table
 will keep track of algorithms uses on particular images including columns of the algorithm type and the before and after image transformation information.  Also the table columns could include the rate of transformation, and the duration of transformation.
 
+Android can we use image browser that let's us use image source.  Take image from gallery and image from camera: get path from local place where this was stored. I did these transform steps.  Original image (with source image somewhere), store the transformations,.  So I'll need an image table and I will need a transform table.
