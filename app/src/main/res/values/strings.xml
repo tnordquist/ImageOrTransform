@@ -6,4 +6,9 @@
   <string name="transform_toggle_off">Transform</string>
   <string name="current_image">Current Image = %d</string>
   <string name="transform_name">Transform Name = %d</string>
+
+  <string name="transform_type_1">Transform1</string>
+  <string name="transform_type_2">Transform2</string>
+  <string name="transform_type_3">Transform2</string>
+
 </resources>

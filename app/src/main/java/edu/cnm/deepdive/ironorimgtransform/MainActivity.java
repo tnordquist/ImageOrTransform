@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.ironorimgtransform;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -15,39 +17,20 @@ public class MainActivity extends AppCompatActivity {
   private TextView imageView;
   private Random rng;
   private int value;
-//  private int activeCorrect;
-//  private int passiveCorrect;
-//  private int incorrect;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    //numberView = findViewById(R.id.number_view);
-    transformToggle = findViewById(R.id.transform_toggle);
-    imageToggle = findViewById(R.id.image_toggle);
-    transformView = findViewById(R.id.transform_view);
-    imageView = findViewById(R.id.current_view);
-    rng = new Random();
-    updateTallyDisplay();
-  }
 
-  private void updateTallyDisplay() {
-    imageView.setText(getString(R.string.current_image));
-    transformView.setText(getString(R.string.transform_name));
-  }
+    FragmentManager fm = getSupportFragmentManager();
+    Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
-//  private void updateView() {
-//    value = 1 + rng.nextInt(UPPER_BOUND);
-//    runOnUiThread(new Runnable() {
-//      @Override
-//      public void run() {
-//        updateTallyDisplay();
-//        numberView.setText(Integer.toString(value));
-//        fizzToggle.setChecked(false);
-//        buzzToggle.setChecked(false);
-//      }
-//    });
-//  }
+    if (fragment == null) {
+      fragment = new TransformFragment();
+      fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+    }
+
+  }
 
 }
