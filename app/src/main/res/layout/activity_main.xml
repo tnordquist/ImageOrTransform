@@ -2,20 +2,20 @@
 <android.support.constraint.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/fragment_container"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
 
-  tools:context=".MainActivity">
+  tools:context=".controller.MainActivity">
 
 
   <ImageView
-    android:id="@+id/transforming_image"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/ic_launcher_background"
-    />
+  android:id="@+id/transforming_image"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+    android:scaleType="fitXY"
+  android:src="@drawable/ic_launcher_background"
+  />
 
   <TextView
     android:id="@+id/current_view"
@@ -33,24 +33,28 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"/>
 
-  <ToggleButton
-    android:id="@+id/image_toggle"
+  <FrameLayout
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="24dp"/>
+
+  <Button
+    android:id="@+id/transform_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textOn="Image!"
-    android:textOff="Image"
+    android:text="Transform"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toLeftOf="@+id/transform_toggle"/>
+    app:layout_constraintRight_toLeftOf="@+id/image_button"/>
 
-  <ToggleButton
-    android:id="@+id/transform_toggle"
+  <Button
+    android:id="@+id/image_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textOn="Transform!"
-    android:textOff="Transform"
+    android:text="Image"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toRightOf="@id/image_toggle"/>
+    app:layout_constraintLeft_toRightOf="@id/transform_button"/>
 
 </android.support.constraint.ConstraintLayout>

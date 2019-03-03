@@ -3,28 +3,38 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:layout="http://schemas.android.com/tools">
+ 
+ <Spinner
+   android:id="@+id/transforms_spinner"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:backgroundTint="@color/colorPrimaryDark"
+   layout:gravity="start"/>
+ 
+ <FrameLayout
+   android:id="@+id/individual_transform_container"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
+ </FrameLayout>
 
  <Button
-   android:id="@+id/transform_1"
-   android:layout_width="match_parent"
+   android:id="@+id/on"
+   android:layout_width="wrap_content"
    android:layout_height="wrap_content"
-   android:text="@string/transform_type_1"
-   app:layout_constraintTop_toTopOf="parent"
+   android:text="@string/transforms_on"
+   app:layout_constraintBottom_toBottomOf="parent"
    app:layout_constraintLeft_toLeftOf="parent"
-   app:layout_constraintBottom_toTopOf="@+id/transform_2"/>
+   app:layout_constraintRight_toLeftOf="@+id/cancel"/>
 
   <Button
-    android:id="@+id/transform_2"
-    android:layout_width="match_parent"
+    android:id="@+id/cancel"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/transform_type_2"
-    />
-
-  <Button
-    android:id="@+id/transform_3"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/transform_type_3"/>
+    android:text="@string/transforms_cancel"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@id/on"/>
 
 </android.support.constraint.ConstraintLayout>
