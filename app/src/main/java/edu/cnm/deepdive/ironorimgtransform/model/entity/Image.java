@@ -4,7 +4,6 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
-import com.google.gson.annotations.Expose;
 import java.util.Date;
 
 @Entity(foreignKeys = @ForeignKey(entity = Transform.class, parentColumns = "transform_id",
@@ -16,20 +15,24 @@ public class Image {
   @PrimaryKey(autoGenerate = true) // assures there's always a unique key
   private long id;
 
+  @ColumnInfo(name = "external_url", index = true)
+  private String externalUrl;
+
+  @ColumnInfo(name = "internal_url", index = true)
+  private String internalURL;
+
   @ColumnInfo(name = "transform_id", index = true)
   private Long transformId;
 
-  private String extUrl;
-
-  private String intURL;
-
+  @ColumnInfo(name = "timestamp", index = true)
   private Date timestamp;
 
+  @ColumnInfo(name = "info", index = true)
   private String info;
 
   @ColumnInfo(name = "from_id")
   @PrimaryKey(autoGenerate = true)
-  private Long from_id;
+  private Long fromId;
 
   public long getId() {
     return id;
@@ -48,19 +51,19 @@ public class Image {
   }
 
   public String getExt_Url() {
-    return extUrl;
+    return externalUrl;
   }
 
   public void setExt_Url(String ext_Url) {
-    this.extUrl = ext_Url;
+    this.externalUrl = ext_Url;
   }
 
   public String getInt_URL() {
-    return intURL;
+    return internalURL;
   }
 
   public void setInt_URL(String int_URL) {
-    this.intURL = int_URL;
+    this.internalURL = int_URL;
   }
 
   public Date getTimestamp() {
@@ -80,11 +83,11 @@ public class Image {
   }
 
   public long getNew_id() {
-    return from_id;
+    return fromId;
   }
 
   public void setNew_id(long new_id) {
-    this.from_id = new_id;
+    this.fromId = new_id;
   }
 
 

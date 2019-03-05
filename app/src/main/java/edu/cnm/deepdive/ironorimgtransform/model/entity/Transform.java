@@ -18,15 +18,15 @@ public class Transform {
 
   @ColumnInfo(name = "transform_id")
   @PrimaryKey(autoGenerate = true)
-  private Long id;
+  private long id;
 
-  @Expose
+ @ColumnInfo(name = "name", index = true)
   private String name;
 
-  @Expose
+  @ColumnInfo(name = "detail", index = true)
   private String detail;// this may become several columns
 
-  @Expose
+  @ColumnInfo(name = "example", index = true)
   private String example;// this can be a drawable resource or it could be a url.
 
   public Long getId() {
