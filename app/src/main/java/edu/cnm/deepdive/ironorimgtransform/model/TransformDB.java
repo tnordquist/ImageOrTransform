@@ -1,11 +1,9 @@
 package edu.cnm.deepdive.ironorimgtransform.model;
-
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
-import android.support.annotation.Nullable;
 import edu.cnm.deepdive.ironorimgtransform.TransformApplication;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB.Converters;
 import edu.cnm.deepdive.ironorimgtransform.model.dao.TransformDao;
@@ -36,7 +34,7 @@ public abstract class TransformDB extends RoomDatabase {
    *
    * @return single {@link TransformDB} instance reference.
    */
-  public synchronized static TransformDB getInstance() {
+  public static TransformDB getInstance() {
     return InstanceHolder.INSTANCE;
   }
 
@@ -64,19 +62,16 @@ public abstract class TransformDB extends RoomDatabase {
   public static class Converters {
 
     /**
-     * Converts an {@link Integer} value containing the days since the start of
-     * the Unix epoch (1970-01-01) to an instance of {@link Date}, and returns
-     * the latter. Both of these are interpreted as local dates, with no
-     * reference to time zone.
+     * Converts an {@link Date} value containing the specific instant
+     * in time, with millisecond precision..
      *
-     * @param days local date as a number of days since the start of the Unix
+     * @param time local date as a number of days since the start of the Unix
      * epoch.
-     * @return local date as a {@link Date} instance.
+     * @return time as a {@link Date} instance.
      */
-    @Nullable
     @TypeConverter
-    public static Date dateFromInt(@Nullable Integer days) {
-      return (days != null) ? Date.fromEpochDays(days) : null;
+    public static Date dateFromLong(Long time) {
+      return (time != null) ? new Date(time) : null;
     }
 
     /**
@@ -87,13 +82,10 @@ public abstract class TransformDB extends RoomDatabase {
      * @param date local date as a {@link Date} instance.
      * @return local date as a number of days since the start of the Unix epoch.
      */
-    @Nullable
     @TypeConverter
-    public static Integer intFromDate(@Nullable Date date) {
-      return (date != null) ? date.toEpochDays() : null;
+    public static Long longFromDate(Date date){
+      return (date != null) ? date.getTime() : null;
     }
-
-
 
   }
 

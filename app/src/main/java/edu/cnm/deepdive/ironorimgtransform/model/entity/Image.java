@@ -5,7 +5,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity(foreignKeys = @ForeignKey(entity = Transform.class, parentColumns = "transform_id",
@@ -20,16 +19,12 @@ public class Image {
   @ColumnInfo(name = "transform_id", index = true)
   private Long transformId;
 
-  @Expose
-  private String ext_Url;
+  private String extUrl;
 
-  @Expose
-  private String int_URL;
+  private String intURL;
 
-  @Expose
   private Date timestamp;
 
-  @Expose
   private String info;
 
   @ColumnInfo(name = "from_id")
@@ -53,19 +48,19 @@ public class Image {
   }
 
   public String getExt_Url() {
-    return ext_Url;
+    return extUrl;
   }
 
   public void setExt_Url(String ext_Url) {
-    this.ext_Url = ext_Url;
+    this.extUrl = ext_Url;
   }
 
   public String getInt_URL() {
-    return int_URL;
+    return intURL;
   }
 
   public void setInt_URL(String int_URL) {
-    this.int_URL = int_URL;
+    this.intURL = int_URL;
   }
 
   public Date getTimestamp() {

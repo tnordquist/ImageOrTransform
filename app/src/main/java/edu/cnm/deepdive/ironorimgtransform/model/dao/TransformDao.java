@@ -45,7 +45,7 @@ public interface TransformDao {
    *
    * @return all {@link Transform} instances in local database.
    */
-  @Query("SELECT * FROM Transform ORDER BY transform_id DESC")
+  @Query("SELECT * FROM Transform ORDER BY name DESC")
   List<Transform> findAll();
 
   /**
