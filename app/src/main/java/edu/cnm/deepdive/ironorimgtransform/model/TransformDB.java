@@ -6,6 +6,7 @@ import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import edu.cnm.deepdive.ironorimgtransform.TransformApplication;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB.Converters;
+import edu.cnm.deepdive.ironorimgtransform.model.dao.ImageDao;
 import edu.cnm.deepdive.ironorimgtransform.model.dao.TransformDao;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
@@ -47,7 +48,7 @@ public abstract class TransformDB extends RoomDatabase {
    */
   public abstract TransformDao getTransformDao();
 
-  public abstract Image getImageDao();
+  public abstract ImageDao getImageDao();
 
 
   private static class InstanceHolder {
