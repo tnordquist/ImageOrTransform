@@ -4,15 +4,13 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
-import com.google.gson.annotations.Expose;
 
 /**
  * Encapsulates the attributes of a single image transformation algorithm. Room and GSon annotations are used to specify entity &amp; attribute mapping for database persistence, and
  * property mapping for JSON serialization/deserialization mapping.
  */
 
-@Entity(
-    indices = @Index(value = "date", unique = true))
+@Entity
 
 public class Transform {
 
@@ -29,7 +27,7 @@ public class Transform {
   @ColumnInfo(name = "example", index = true)
   private String example;// this can be a drawable resource or it could be a url.
 
-  public Long getId() {
+  public long getId() {
     return id;
   }
 

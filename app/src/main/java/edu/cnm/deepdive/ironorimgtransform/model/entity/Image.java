@@ -31,7 +31,6 @@ public class Image {
   private String info;
 
   @ColumnInfo(name = "from_id")
-  @PrimaryKey(autoGenerate = true)
   private Long fromId;
 
   public long getId() {
@@ -42,28 +41,28 @@ public class Image {
     this.id = id;
   }
 
-  public long getTransformId() {
-    return transformId;
-  }
-
-  public void setTransformId(long transformId) {
-    this.transformId = transformId;
-  }
-
-  public String getExt_Url() {
+  public String getExternalUrl() {
     return externalUrl;
   }
 
-  public void setExt_Url(String ext_Url) {
-    this.externalUrl = ext_Url;
+  public void setExternalUrl(String externalUrl) {
+    this.externalUrl = externalUrl;
   }
 
-  public String getInt_URL() {
+  public String getInternalURL() {
     return internalURL;
   }
 
-  public void setInt_URL(String int_URL) {
-    this.internalURL = int_URL;
+  public void setInternalURL(String internalURL) {
+    this.internalURL = internalURL;
+  }
+
+  public Long getTransformId() {
+    return transformId;
+  }
+
+  public void setTransformId(Long transformId) {
+    this.transformId = transformId;
   }
 
   public Date getTimestamp() {
@@ -82,13 +81,11 @@ public class Image {
     this.info = info;
   }
 
-  public long getNew_id() {
+  public Long getFromId() {
     return fromId;
   }
 
-  public void setNew_id(long new_id) {
-    this.fromId = new_id;
+  public void setFromId(Long fromId) {
+    this.fromId = fromId;
   }
-
-
 }

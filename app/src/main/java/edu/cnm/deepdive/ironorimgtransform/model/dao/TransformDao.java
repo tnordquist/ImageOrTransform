@@ -7,7 +7,6 @@ import android.arch.persistence.room.Query;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 
 import android.arch.persistence.room.Dao;
-import java.util.Date;
 import java.util.List;
 
 /**
