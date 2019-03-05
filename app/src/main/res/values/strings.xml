@@ -1,10 +1,5 @@
 <resources>
   <string name="app_name">IronOrImgTransform</string>
-  <string name="transform_toggle_on">Transform!</string>
-  <string name="image_toggle_off">Image</string>
-  <string name="transform_toggle_off">Transform</string>
-  <string name="current_image">Current Image = %d</string>
-  <string name="transform_name">Transform Name = %d</string>
 
   <string name="transforms_on">On</string>
   <string name="transforms_cancel">Cancel</string>

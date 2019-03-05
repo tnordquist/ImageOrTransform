@@ -11,14 +11,14 @@ import java.util.Date;
 @Entity(foreignKeys = @ForeignKey(entity = Transform.class, parentColumns = "transform_id",
     childColumns = "transform_id", onDelete = ForeignKey.CASCADE))
 
-public class Image { // Serializable needed?
+public class Image {
 
   @ColumnInfo(name = "image_id")
   @PrimaryKey(autoGenerate = true) // assures there's always a unique key
-  private Long id;
+  private long id;
 
   @ColumnInfo(name = "transform_id", index = true)
-  private long transformId;
+  private Long transformId;
 
   @Expose
   private String ext_Url;
@@ -32,7 +32,7 @@ public class Image { // Serializable needed?
   @Expose
   private String info;
 
-  @ColumnInfo(name = "from_id") // Do I need new_id or just need a new id?
+  @ColumnInfo(name = "from_id")
   @PrimaryKey(autoGenerate = true)
   private Long from_id;
 
