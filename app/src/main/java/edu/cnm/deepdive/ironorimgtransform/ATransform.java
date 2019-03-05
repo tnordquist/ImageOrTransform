@@ -1,5 +1,5 @@
 package edu.cnm.deepdive.ironorimgtransform;
 
-public class Transform {
+public class ATransform {
 
 }

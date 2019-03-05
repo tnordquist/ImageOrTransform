@@ -4,15 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import edu.cnm.deepdive.ironorimgtransform.R;
-import edu.cnm.deepdive.ironorimgtransform.Transform;
+import edu.cnm.deepdive.ironorimgtransform.ATransform;
 
 /**
  * This class is a controller
@@ -20,7 +21,7 @@ import edu.cnm.deepdive.ironorimgtransform.Transform;
 
 public class TransformFragment extends Fragment {
 
-  private Transform transform;
+  private ATransform transform;
   private Button on;
   private Button cancel;
   public Spinner spinner;
@@ -30,7 +31,7 @@ public class TransformFragment extends Fragment {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    transform = new Transform();
+    transform = new ATransform();
 
   }
 
@@ -41,16 +42,35 @@ public class TransformFragment extends Fragment {
 
     View view = inflater.inflate(R.layout.dialog_transform, container, false);
 
-    spinner =  view.findViewById(R.id.transforms_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-        R.array.transforms_choice, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-    spinner.setAdapter(adapter);
+    spinner = view.findViewById(R.id.transforms_spinner);
 
     transform1 = new Transform1();
+
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.custom_spinner, getResources().getStringArray(R.array.transforms_choice));
+
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+    spinner.setAdapter(adapter);
+
+    spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> parent, View view, int position,
+          long id) {
+
+        switch (position){
+          case 1:
+            break;
+          case 2:
+            break;
+        }
+
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
+
+      }
+    });
 
     on = view.findViewById(R.id.on);
     on.setEnabled(false);
@@ -62,4 +82,9 @@ public class TransformFragment extends Fragment {
 
 
   }
+
+//  public void setFragment(Fragment fragment) {
+//    FragmentTransaction fragmentTransaction = (FragmentManager) getSupportFragmentManager().beginTransaction();
+//  }
+
 }

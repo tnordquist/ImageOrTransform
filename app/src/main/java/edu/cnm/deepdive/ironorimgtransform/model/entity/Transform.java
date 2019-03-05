@@ -2,19 +2,23 @@ package edu.cnm.deepdive.ironorimgtransform.model.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 
+/**
+ * Encapsulates the attributes of a single image transformation algorithm. Room and GSon annotations are used to specify entity &amp; attribute mapping for database persistence, and
+ * property mapping for JSON serialization/deserialization mapping.
+ */
+
 @Entity(
     indices = @Index(value = "date", unique = true))
 
-public class Transforms {
+public class Transform {
 
   @ColumnInfo(name = "transform_id")
   @PrimaryKey(autoGenerate = true)
-  private long id;
+  private Long id;
 
   @Expose
   private String name;
@@ -23,9 +27,9 @@ public class Transforms {
   private String detail;// this may become several columns
 
   @Expose
-  private String example;// should this be a url?
+  private String example;// this can be a drawable resource or it could be a url.
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 

@@ -8,14 +8,14 @@ import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity(foreignKeys = @ForeignKey(entity = Transforms.class, parentColumns = "transform_id",
+@Entity(foreignKeys = @ForeignKey(entity = Transform.class, parentColumns = "transform_id",
     childColumns = "transform_id", onDelete = ForeignKey.CASCADE))
 
-public class ImageOrd implements Serializable { // Serializable needed?
+public class Image { // Serializable needed?
 
   @ColumnInfo(name = "image_id")
   @PrimaryKey(autoGenerate = true) // assures there's always a unique key
-  private long id;
+  private Long id;
 
   @ColumnInfo(name = "transform_id", index = true)
   private long transformId;
@@ -32,9 +32,9 @@ public class ImageOrd implements Serializable { // Serializable needed?
   @Expose
   private String info;
 
-  @ColumnInfo(name = "new_id") // Do I need new_id or just need a new id?
+  @ColumnInfo(name = "from_id") // Do I need new_id or just need a new id?
   @PrimaryKey(autoGenerate = true)
-  private long new_id;
+  private Long from_id;
 
   public long getId() {
     return id;
@@ -85,11 +85,11 @@ public class ImageOrd implements Serializable { // Serializable needed?
   }
 
   public long getNew_id() {
-    return new_id;
+    return from_id;
   }
 
   public void setNew_id(long new_id) {
-    this.new_id = new_id;
+    this.from_id = new_id;
   }
 
 
