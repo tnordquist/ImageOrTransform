@@ -1,0 +1,183 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "621ec2daf10685a15ab1f5ca57245a1c",
+    "entities": [
+      {
+        "tableName": "Transform",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`transform_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `detail` TEXT, `example` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "transform_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "detail",
+            "columnName": "detail",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "example",
+            "columnName": "example",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "transform_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Transform_name",
+            "unique": false,
+            "columnNames": [
+              "name"
+            ],
+            "createSql": "CREATE  INDEX `index_Transform_name` ON `${TABLE_NAME}` (`name`)"
+          },
+          {
+            "name": "index_Transform_detail",
+            "unique": false,
+            "columnNames": [
+              "detail"
+            ],
+            "createSql": "CREATE  INDEX `index_Transform_detail` ON `${TABLE_NAME}` (`detail`)"
+          },
+          {
+            "name": "index_Transform_example",
+            "unique": false,
+            "columnNames": [
+              "example"
+            ],
+            "createSql": "CREATE  INDEX `index_Transform_example` ON `${TABLE_NAME}` (`example`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Image",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`image_id` INTEGER NOT NULL, `external_url` TEXT, `internal_url` TEXT, `transform_id` INTEGER, `timestamp` INTEGER, `info` TEXT, `from_id` INTEGER, FOREIGN KEY(`transform_id`) REFERENCES `Transform`(`transform_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "image_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "externalUrl",
+            "columnName": "external_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "internalURL",
+            "columnName": "internal_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "transformId",
+            "columnName": "transform_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "info",
+            "columnName": "info",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fromId",
+            "columnName": "from_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_Image_external_url",
+            "unique": false,
+            "columnNames": [
+              "external_url"
+            ],
+            "createSql": "CREATE  INDEX `index_Image_external_url` ON `${TABLE_NAME}` (`external_url`)"
+          },
+          {
+            "name": "index_Image_internal_url",
+            "unique": false,
+            "columnNames": [
+              "internal_url"
+            ],
+            "createSql": "CREATE  INDEX `index_Image_internal_url` ON `${TABLE_NAME}` (`internal_url`)"
+          },
+          {
+            "name": "index_Image_transform_id",
+            "unique": false,
+            "columnNames": [
+              "transform_id"
+            ],
+            "createSql": "CREATE  INDEX `index_Image_transform_id` ON `${TABLE_NAME}` (`transform_id`)"
+          },
+          {
+            "name": "index_Image_timestamp",
+            "unique": false,
+            "columnNames": [
+              "timestamp"
+            ],
+            "createSql": "CREATE  INDEX `index_Image_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
+          },
+          {
+            "name": "index_Image_info",
+            "unique": false,
+            "columnNames": [
+              "info"
+            ],
+            "createSql": "CREATE  INDEX `index_Image_info` ON `${TABLE_NAME}` (`info`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Transform",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "transform_id"
+            ],
+            "referencedColumns": [
+              "transform_id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"621ec2daf10685a15ab1f5ca57245a1c\")"
+    ]
+  }
+}
