@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import edu.cnm.deepdive.ironorimgtransform.R;
+import edu.cnm.deepdive.ironorimgtransform.controller.TransformPickerFragment.NoticeDialogListener;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 import java.util.List;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements
     setContentView(R.layout.activity_main);
     Button transformButton = findViewById(R.id.transform_button);
     transformButton.setOnClickListener((v ) -> showPopup(v));
+    confirmTransformPicker();
   }
 
   public void showPopup(View v) {
@@ -45,6 +47,17 @@ public class MainActivity extends AppCompatActivity implements
 //      popup.getMenu().add(Menu.NONE, (int) transform.getId(), Menu.NONE, transform.getName());
 //    }
     popup.show();
+  }
+
+  public void showNoticeDialog() {
+    // Create an instance of the dialog fragment and show it.
+    DialogFragment dialogFragment = new TransformPickerFragment();
+    dialogFragment.show(getSupportFragmentManager(), "Notice Dialog Fragment");
+  }
+
+  public void confirmTransformPicker() {
+    DialogFragment newFragment = new TransformPickerFragment();
+    newFragment.show(getSupportFragmentManager(), "transforms");
   }
 
   @Override

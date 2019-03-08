@@ -1,8 +1,6 @@
 package edu.cnm.deepdive.ironorimgtransform.controller;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
