@@ -1,9 +1,11 @@
 package edu.cnm.deepdive.ironorimgtransform.model;
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
+import android.support.annotation.NonNull;
 import edu.cnm.deepdive.ironorimgtransform.TransformApplication;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB.Converters;
 import edu.cnm.deepdive.ironorimgtransform.model.dao.ImageDao;
@@ -56,6 +58,7 @@ public abstract class TransformDB extends RoomDatabase {
     private static final TransformDB INSTANCE = Room.databaseBuilder(
         TransformApplication.getInstance().getApplicationContext(),
         TransformDB.class, DB_NAME)
+        .addCallback(new Prepopulate())
         .build();
 
   }
@@ -90,5 +93,19 @@ public abstract class TransformDB extends RoomDatabase {
 
   }
 
+  private static class Prepopulate extends Callback {
+
+    @Override
+    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+      super.onCreate(db);
+      // TODO Add code to populate database.
+    }
+
+    @Override
+    public void onOpen(@NonNull SupportSQLiteDatabase db) {
+      super.onOpen(db);
+    }
+
+  }
 
 }

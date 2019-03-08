@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "621ec2daf10685a15ab1f5ca57245a1c",
+    "identityHash": "843334e7207c5a95983195b18140a35e",
     "entities": [
       {
         "tableName": "Transform",
@@ -69,7 +69,7 @@
       },
       {
         "tableName": "Image",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`image_id` INTEGER NOT NULL, `external_url` TEXT, `internal_url` TEXT, `transform_id` INTEGER, `timestamp` INTEGER, `info` TEXT, `from_id` INTEGER, FOREIGN KEY(`transform_id`) REFERENCES `Transform`(`transform_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`image_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `external_url` TEXT, `internal_url` TEXT, `transform_id` INTEGER, `timestamp` INTEGER, `info` TEXT, `from_id` INTEGER, FOREIGN KEY(`transform_id`) REFERENCES `Transform`(`transform_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -115,8 +115,10 @@
           }
         ],
         "primaryKey": {
-          "columnNames": [],
-          "autoGenerate": false
+          "columnNames": [
+            "image_id"
+          ],
+          "autoGenerate": true
         },
         "indices": [
           {
@@ -177,7 +179,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"621ec2daf10685a15ab1f5ca57245a1c\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"843334e7207c5a95983195b18140a35e\")"
     ]
   }
 }

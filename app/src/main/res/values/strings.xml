@@ -3,13 +3,12 @@
 
   <string name="transforms_on">On</string>
   <string name="transforms_cancel">Cancel</string>
+  <string name="transform_picker_title">Transform Type:</string>
 
   <string-array name="transforms_choice">
     <item>Transform1</item>
     <item>Transform2</item>
+    <item>Transform3</item>
   </string-array>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
