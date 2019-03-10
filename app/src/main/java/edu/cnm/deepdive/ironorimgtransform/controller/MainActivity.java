@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import edu.cnm.deepdive.ironorimgtransform.R;
-import edu.cnm.deepdive.ironorimgtransform.controller.TransformPickerFragment.NoticeDialogListener;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 import java.util.List;
@@ -24,13 +23,12 @@ public class MainActivity extends AppCompatActivity implements
   List<Transform> transforms;
 
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     Button transformButton = findViewById(R.id.transform_button);
-    transformButton.setOnClickListener((v ) -> showPopup(v));
+    transformButton.setOnClickListener((v) -> showPopup(v));
     confirmTransformPicker();
   }
 
@@ -62,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements
 
   @Override
   public boolean onMenuItemClick(MenuItem item) {
-
-    return false;
+    showNoticeDialog();
+    return true;
   }
 
   @Override
@@ -77,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements
   }
 
 
-  private class TransformListQuery extends AsyncTask<Void, Void, List<Transform>> {
+  private class TransformListQuery extends
+      AsyncTask<Void, Void, List<Transform>> {
 
 
     @Override

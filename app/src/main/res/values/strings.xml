@@ -5,10 +5,15 @@
   <string name="transforms_cancel">Cancel</string>
   <string name="transform_picker_title">Transform Type:</string>
 
+  <string name="gaussian_x">Enter Horizontal Distance From Origin</string>
+  <string name="gaussian_y">Enter Vertical Distance From Orgin</string>
+  <string name="gaussian_standard_deviation">Enter Standard Deviation</string>
+
   <string-array name="transforms_choice">
     <item>Transform1</item>
     <item>Transform2</item>
     <item>Transform3</item>
   </string-array>
+
 
 </resources>
