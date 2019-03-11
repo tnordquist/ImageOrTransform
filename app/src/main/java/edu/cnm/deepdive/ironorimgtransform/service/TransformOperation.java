@@ -7,6 +7,7 @@ public class TransformOperation {
   private Bitmap transform(Bitmap src) {
 
     return src;
+
   }
 
   private int getLayout() {

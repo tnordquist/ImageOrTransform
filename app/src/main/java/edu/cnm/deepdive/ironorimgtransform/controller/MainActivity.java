@@ -17,7 +17,7 @@ import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-    OnMenuItemClickListener, TransformPickerFragment.NoticeDialogListener {
+    OnMenuItemClickListener, TransformPickerDialogFragment.NoticeDialogListener {
 
   private ImageButton menuButton;
   List<Transform> transforms;
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements
     setContentView(R.layout.activity_main);
     Button transformButton = findViewById(R.id.transform_button);
     transformButton.setOnClickListener((v) -> showPopup(v));
-    confirmTransformPicker();
   }
 
   public void showPopup(View v) {
@@ -41,26 +40,22 @@ public class MainActivity extends AppCompatActivity implements
     for (String choice : choices) {
       MenuItem item = popup.getMenu().add(choice);
     }
-//    for (Transform transform : transforms) {
-//      popup.getMenu().add(Menu.NONE, (int) transform.getId(), Menu.NONE, transform.getName());
-//    }
+
+    popup.setOnMenuItemClickListener(menuItem -> {
+      showNoticeDialog("Transform1");
+      return true;
+    });
     popup.show();
   }
 
-  public void showNoticeDialog() {
+  public void showNoticeDialog(String str) {
     // Create an instance of the dialog fragment and show it.
-    DialogFragment dialogFragment = new TransformPickerFragment();
+    DialogFragment dialogFragment = new TransformPickerDialogFragment();
     dialogFragment.show(getSupportFragmentManager(), "Notice Dialog Fragment");
-  }
-
-  public void confirmTransformPicker() {
-    DialogFragment newFragment = new TransformPickerFragment();
-    newFragment.show(getSupportFragmentManager(), "transforms");
   }
 
   @Override
   public boolean onMenuItemClick(MenuItem item) {
-    showNoticeDialog();
     return true;
   }
 

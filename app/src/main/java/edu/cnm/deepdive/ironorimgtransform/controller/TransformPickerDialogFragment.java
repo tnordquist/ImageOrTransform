@@ -8,12 +8,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 import edu.cnm.deepdive.ironorimgtransform.R;
 
-public class TransformPickerFragment extends DialogFragment {
+public class TransformPickerDialogFragment extends DialogFragment {
 
   // Use this instance of the interface to deliver action events
   private NoticeDialogListener listener;
+
+  private EditText x; // TODO and. ch7 wiring up widget: do I do this?
 
   // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
   @Override
@@ -25,6 +28,7 @@ public class TransformPickerFragment extends DialogFragment {
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     //Get the layout inflater
     LayoutInflater inflater = requireActivity().getLayoutInflater();
@@ -32,7 +36,7 @@ public class TransformPickerFragment extends DialogFragment {
     //Inflate and set the layout for the dialog
     //pass null as the parent view because it is going on the dialog layout.
     builder
-        .setView(inflater.inflate(R.layout.dialog_transform, null))
+        .setView(inflater.inflate(R.layout.fragment_gaussian_blur, null))
 
         // Add action buttons
         .setPositiveButton(R.string.transforms_on,
