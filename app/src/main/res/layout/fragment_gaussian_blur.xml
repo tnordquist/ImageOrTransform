@@ -5,7 +5,9 @@
   android:layout_height="match_parent"
   xmlns:tools="http://schemas.android.com/tools"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  tools:context=".controller.TransformPickerDialogFragment">
+  tools:context=".controller.TransformPickerDialogFragment"
+  android:theme="@style/GaussianBlur"
+  style="@style/GaussianBlur">
 
   <EditText
     android:id="@+id/gaussian_x"

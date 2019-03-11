@@ -32,7 +32,6 @@ public class TransformPickerDialogFragment extends DialogFragment {
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     //Get the layout inflater
     LayoutInflater inflater = requireActivity().getLayoutInflater();
-
     //Inflate and set the layout for the dialog
     //pass null as the parent view because it is going on the dialog layout.
     builder
@@ -43,6 +42,7 @@ public class TransformPickerDialogFragment extends DialogFragment {
             (dialog, which) -> listener.onDialogPositiveClick(this))
         .setNegativeButton(R.string.transforms_cancel,
             (dialog, which) -> listener.onDialogNegativeClick(this));
+    builder.setTitle("Gaussian Blur");
     return builder.create();
   }
 

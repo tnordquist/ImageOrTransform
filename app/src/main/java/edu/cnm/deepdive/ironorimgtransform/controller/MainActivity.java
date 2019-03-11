@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements
 
   @Override
   public boolean onMenuItemClick(MenuItem item) {
-    return true;
+    return false;
   }
 
   @Override
