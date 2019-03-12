@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.ironorimgtransform.controller;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -22,6 +23,7 @@ import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import edu.cnm.deepdive.ironorimgtransform.service.GoogleSignInService;
 
 public class MainActivity extends AppCompatActivity implements
     OnMenuItemClickListener,
@@ -111,4 +113,17 @@ public class MainActivity extends AppCompatActivity implements
     }
 
   }
+
+  private void signOut() {
+    GoogleSignInService.getInstance().getClient().signOut()
+        .addOnCompleteListener(this, (task) -> {
+          GoogleSignInService.getInstance().setAccount(null);
+          Intent intent = new Intent(this, LoginActivity.class);
+          intent.addFlags(
+              Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+          startActivity(intent);
+        });
+  }
+
+
 }

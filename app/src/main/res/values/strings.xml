@@ -9,6 +9,9 @@
   <string name="gaussian_y">Enter Vertical Distance From Orgin</string>
   <string name="gaussian_standard_deviation">Enter Standard Deviation</string>
 
+  <string name="access_count_format">%,d</string>
+  <string name="login_failure_message">Unable to sign in with provided credentials</string>
+
   <string-array name="transforms_choice">
     <item>Transform1</item>
     <item>Transform2</item>
