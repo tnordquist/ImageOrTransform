@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "843334e7207c5a95983195b18140a35e",
+    "identityHash": "40031eb9ec82642df35d160b0df1b646",
     "entities": [
       {
         "tableName": "Transform",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`transform_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `detail` TEXT, `example` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`transform_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `detail` TEXT COLLATE NOCASE, `example` TEXT, `clazz` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -18,7 +18,7 @@
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "detail",
@@ -29,6 +29,12 @@
           {
             "fieldPath": "example",
             "columnName": "example",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clazz",
+            "columnName": "clazz",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -55,14 +61,6 @@
               "detail"
             ],
             "createSql": "CREATE  INDEX `index_Transform_detail` ON `${TABLE_NAME}` (`detail`)"
-          },
-          {
-            "name": "index_Transform_example",
-            "unique": false,
-            "columnNames": [
-              "example"
-            ],
-            "createSql": "CREATE  INDEX `index_Transform_example` ON `${TABLE_NAME}` (`example`)"
           }
         ],
         "foreignKeys": []
@@ -179,7 +177,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"843334e7207c5a95983195b18140a35e\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"40031eb9ec82642df35d160b0df1b646\")"
     ]
   }
 }

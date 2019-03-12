@@ -13,25 +13,25 @@
   android:id="@+id/transforming_image"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-    android:scaleType="fitXY"
-  android:src="@drawable/ic_launcher_background"
+    android:scaleType="fitCenter"
+  android:src="@drawable/test_source"
   />
 
-  <TextView
-    android:id="@+id/current_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    style="@style/ImageNameStyle"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintRight_toRightOf="parent"/>
+  <!--<TextView-->
+    <!--android:id="@+id/current_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--style="@style/ImageNameStyle"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"/>-->
 
-  <TextView
-    android:id="@+id/transform_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    style="@style/TransformNameStyle"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"/>
+  <!--<TextView-->
+    <!--android:id="@+id/transform_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--style="@style/TransformNameStyle"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"/>-->
 
   <FrameLayout
     android:id="@+id/fragment_container"

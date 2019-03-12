@@ -1,4 +1,5 @@
 package edu.cnm.deepdive.ironorimgtransform.model;
+
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -13,6 +14,7 @@ import edu.cnm.deepdive.ironorimgtransform.model.dao.TransformDao;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 import java.util.Date;
+import java.util.concurrent.Executors;
 
 /**
  * Defines the local database as a collection of its entities and converters,
@@ -66,8 +68,8 @@ public abstract class TransformDB extends RoomDatabase {
   public static class Converters {
 
     /**
-     * Converts an {@link Date} value containing the specific instant
-     * in time, with millisecond precision..
+     * Converts an {@link Date} value containing the specific instant in time,
+     * with millisecond precision..
      *
      * @param time local date as a number of days since the start of the Unix
      * epoch.
@@ -87,7 +89,7 @@ public abstract class TransformDB extends RoomDatabase {
      * @return local date as a number of days since the start of the Unix epoch.
      */
     @TypeConverter
-    public static Long longFromDate(Date date){
+    public static Long longFromDate(Date date) {
       return (date != null) ? date.getTime() : null;
     }
 
@@ -98,7 +100,16 @@ public abstract class TransformDB extends RoomDatabase {
     @Override
     public void onCreate(@NonNull SupportSQLiteDatabase db) {
       super.onCreate(db);
-      // TODO Add code to populate database.
+      Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
+        @Override
+        public void run() {
+          Transform transform = new Transform();
+          transform.setName("Gaussian Blur");
+          transform.setClazz("edu.cnm.deepdive.ironorimgtransform.service.GaussianBlur");
+          getInstance().getTransformDao().insert(transform);
+
+        }
+      });
     }
 
     @Override

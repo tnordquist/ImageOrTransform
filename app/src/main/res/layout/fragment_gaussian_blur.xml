@@ -9,28 +9,12 @@
   android:theme="@style/GaussianBlur"
   style="@style/GaussianBlur">
 
-  <EditText
-    android:id="@+id/gaussian_x"
+  <SeekBar
+    android:id="@+id/standard_deviation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="@string/gaussian_x"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/gaussian_y"/>
+    android:max="10"
 
-  <EditText
-    android:id="@+id/gaussian_y"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="@string/gaussian_y"
-    app:layout_constraintTop_toBottomOf="@id/gaussian_x"
-    app:layout_constraintBottom_toTopOf="@id/gaussian_standard_deviation"/>
-
-  <EditText
-    android:id="@+id/gaussian_standard_deviation"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="@string/gaussian_standard_deviation"
-    app:layout_constraintTop_toBottomOf="@id/gaussian_y"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    />
 
 </android.support.constraint.ConstraintLayout>
