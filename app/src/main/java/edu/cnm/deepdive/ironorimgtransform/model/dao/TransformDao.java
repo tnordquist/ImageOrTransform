@@ -29,18 +29,32 @@ public interface TransformDao {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   List<Long> insert(Transform... transforms);
 
+
   /**
-   * Selects and returns the single {@link Transform} instance (or null) for the specified {@link transform_id}.
+   * For inserting multiple {@Transform} instances into the local database.Any
+   * primary or unique key constraint violations will result in the existing *
+   * records being retained.
+   *
+   * @param transforms {@Link Transform} instances(s)
+   * @return inserted records.
+   */
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  List<Long> insert(List<Transform> transforms);
+
+  /**
+   * Selects and returns the single {@link Transform} instance (or null) for the
+   * specified {@link transform_id}.
    *
    * @param Transform desired {@link transform_id} {@link transform_id}.
-   * @return {@link Transform} instance if found in database; <code>null</code> otherwise.
+   * @return {@link Transform} instance if found in database; <code>null</code>
+   * otherwise.
    */
   @Query("SELECT * FROM Transform WHERE transform_id = :id")
   Transform findById(Long id);
 
   /**
-   * Selects and returns all {@link Transform} instances in the local database, sorting the result in
-   * descending id order.
+   * Selects and returns all {@link Transform} instances in the local database,
+   * sorting the result in descending id order.
    *
    * @return all {@link Transform} instances in local database.
    */
@@ -50,7 +64,8 @@ public interface TransformDao {
   /**
    * Deletes one or more {@link Transform} instances from local database.
    *
-   * @param transforms instances of {@link Transform} to be deleted from database.
+   * @param transforms instances of {@link Transform} to be deleted from
+   * database.
    * @return number of records deleted.
    */
   @Delete

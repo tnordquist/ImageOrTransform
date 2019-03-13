@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.ironorimgtransform.controller;
 
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase.Builder;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,14 +22,19 @@ import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
 import edu.cnm.deepdive.ironorimgtransform.service.GoogleSignInService;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 public class MainActivity extends AppCompatActivity implements
     OnMenuItemClickListener,
-    TransformPickerDialogFragment.BitmapAccess{
+    TransformPickerDialogFragment.BitmapAccess {
 
   private ImageButton menuButton;
   private List<Transform> transforms;
@@ -37,6 +44,24 @@ public class MainActivity extends AppCompatActivity implements
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    try (
+        InputStream input = getResources().openRawResource(R.raw.sample_data);
+        Reader reader = new InputStreamReader(input);
+        CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT)
+    ) {
+      for (CSVRecord record : parser) {
+        String col0 = record.get(0);
+        String col1 = record.get(1);
+        String col2 = record.get(2);
+        // TODO Create entity instances, invoke setters to set fields from CSV
+        // data, use DAOs to write entity instances to DB(best if DAO provides
+        // an insert(List) form).
+      }
+    } catch (IOException e) {
+      Log.e("Something went wrong!", getClass().getSimpleName());
+    }
+
     setContentView(R.layout.activity_main);
     new TransformListQuery().execute();
     Button transformButton = findViewById(R.id.transform_button);
@@ -57,10 +82,13 @@ public class MainActivity extends AppCompatActivity implements
           .setOnMenuItemClickListener((item) -> {
             try {
               Class<? extends TransformOperation> clazz =
-                  (Class<? extends TransformOperation>) getClass().getClassLoader().loadClass(transform.getClazz());
+                  (Class<? extends TransformOperation>) getClass()
+                      .getClassLoader().loadClass(transform.getClazz());
               TransformOperation operation = clazz.newInstance();
-              DialogFragment dialogFragment = TransformPickerDialogFragment.newInstance(operation);
-              dialogFragment.show(getSupportFragmentManager(), dialogFragment.getClass().getSimpleName());
+              DialogFragment dialogFragment = TransformPickerDialogFragment
+                  .newInstance(operation);
+              dialogFragment.show(getSupportFragmentManager(),
+                  dialogFragment.getClass().getSimpleName());
               return true;
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
               e.printStackTrace();
