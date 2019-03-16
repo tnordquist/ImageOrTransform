@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.ironorimgtransform.service;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
@@ -17,7 +16,7 @@ public class GaussianBlur extends TransformOperation {
     int stDev = standardDeviation.getProgress();
     stDev = stDev / 3;
     Bitmap bitmap = super.transform(src, view);
-    pixelsArr(bitmap);
+    //pixelsArr(bitmap);
     bitmap = fastblur(src, stDev, 10);
     return bitmap;
     // TODO query view to get values of ui controls and create new bitmap accordingly
@@ -29,16 +28,16 @@ public class GaussianBlur extends TransformOperation {
     return R.layout.fragment_gaussian_blur;
   }
 
-  private int[][] pixelsArr(Bitmap src) {
-
-    int[][] pixelsArr = new int[src.getWidth()][src.getHeight()];
-
-    for (int row = 0; row < src.getHeight(); ++row) {
-      src.getPixels(pixelsArr[row], 0, src.getWidth(), 0, row, src.getWidth(),
-          1);
-    }
-    return pixelsArr;
-  }
+//  private int[][] pixelsArr(Bitmap src) {
+//
+//    int[][] pixelsArr = new int[src.getWidth()][src.getHeight()];
+//
+//    for (int row = 0; row < src.getHeight(); ++row) {
+//      src.getPixels(pixelsArr[row], 0, src.getWidth(), 0, row, src.getWidth(),
+//          1);
+//    }
+//    return pixelsArr;
+//  }
 
   public Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
 

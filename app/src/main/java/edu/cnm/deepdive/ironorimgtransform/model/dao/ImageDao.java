@@ -12,6 +12,9 @@ import java.util.List;
 public interface ImageDao {
 
   @Insert
+  long insert(Image accesses);
+
+  @Insert
   List<Long> insert(Image... accesses);
 
   @Insert

@@ -7,6 +7,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import edu.cnm.deepdive.ironorimgtransform.TransformApplication;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB.Converters;
 import edu.cnm.deepdive.ironorimgtransform.model.dao.ImageDao;
@@ -14,6 +15,7 @@ import edu.cnm.deepdive.ironorimgtransform.model.dao.TransformDao;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 /**
@@ -118,5 +120,14 @@ public abstract class TransformDB extends RoomDatabase {
     }
 
   }
+
+//  private static class PreloadTask extends BaseFluentAsyncTask<Void, Void, List<Transform>, List<Transform>>{
+//
+//    @Nullable
+//    @Override
+//    protected List<Transform> per
+//
+//  }
+
 
 }
