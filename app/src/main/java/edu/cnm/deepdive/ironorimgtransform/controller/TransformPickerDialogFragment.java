@@ -71,7 +71,6 @@ public class TransformPickerDialogFragment extends DialogFragment {
         .setNegativeButton(R.string.transforms_cancel,
             (dialog, which) -> {
             });
-    builder.setTitle("Gaussian Blur");
     return builder.create();
   }
 

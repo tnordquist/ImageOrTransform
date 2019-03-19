@@ -1,7 +1,8 @@
 package edu.cnm.deepdive.ironorimgtransform.controller;
 
 import android.app.Activity;
-import android.content.DialogInterface;
+import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -21,10 +22,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
+import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
 import edu.cnm.deepdive.ironorimgtransform.service.Utility;
@@ -36,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Date;
 import java.util.List;
 import edu.cnm.deepdive.ironorimgtransform.service.GoogleSignInService;
 import org.apache.commons.csv.CSVFormat;
@@ -48,10 +50,11 @@ public class MainActivity extends AppCompatActivity implements
 
   private static final int SELECT_FILE = 1;
   private static final int REQUEST_CAMERA = 2;
-  private ImageButton menuButton;
   private List<Transform> transforms;
   private ImageView transformingImage;
   private String userChosenTask;
+  private static TransformDB transformDB;
+  private Date date;
 
 
   @Override
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements
       for (CSVRecord record : parser) {
         String col0 = record.get(0);
         String col1 = record.get(1);
-        String col2 = record.get(2);
+
         // TODO Create entity instances, invoke setters to set fields from CSV
         // data, use DAOs to write entity instances to DB(best if DAO provides
         // an insert(List) form).
@@ -82,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements
     transformButton.setOnClickListener((v) -> showPopup(v));
     Button image = findViewById(R.id.image_button);
     image.setOnClickListener((v) -> selectImage());
+    transformDB = Room.databaseBuilder(getApplicationContext(), TransformDB.class, "transform_db")
+        .allowMainThreadQueries()
+        .build();
   }
 
   public void showPopup(View v) {
@@ -125,12 +131,6 @@ public class MainActivity extends AppCompatActivity implements
     dialogFragment.show(getSupportFragmentManager(), "Notice Dialog Fragment");
   }
 
-  public MainActivity() {
-    super();
-  }
-
-
-
   @Override
   public boolean onMenuItemClick(MenuItem item) {
     return false;
@@ -144,6 +144,33 @@ public class MainActivity extends AppCompatActivity implements
   @Override
   public void setBitmap(Bitmap bitmap) {
     transformingImage.setImageBitmap(bitmap);
+
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+    if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+      Log.v("TEST","Is writeable");
+    }
+    File destination = new File(getExternalFilesDir(null),
+        System.currentTimeMillis() + ".jpg");
+    FileOutputStream fo;
+    try {
+      destination.createNewFile();
+      destination.toURL();
+      fo = new FileOutputStream(destination);
+      fo.write(bytes.toByteArray());
+      fo.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Image image = new Image();
+    image.setId(getTaskId());
+    image.setTransformId((long) getTaskId());
+    image.setTimestamp(new Date());
+    image.setInternalURL(destination.toString());
+    image.setTransformId((long) getTaskId());
+    transformDB.getImageDao().insert(image);
   }
 
   private class TransformListQuery extends
@@ -163,46 +190,44 @@ public class MainActivity extends AppCompatActivity implements
   }
 
   private void selectImage() {
-    final CharSequence[] items = { "Take Photo", "Choose from Library",
-        "Cancel" };
+    final CharSequence[] items = {"Take Photo", "Choose from Library",
+        "Cancel"};
 
     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
     builder.setTitle("Add Photo!");
-    builder.setItems(items, new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int item) {
-        boolean result= Utility.checkPermission(MainActivity.this);
+    builder.setItems(items, (dialog, item) -> {
+      boolean result = Utility.checkPermission(MainActivity.this);
 
-        if (items[item].equals("Take Photo")) {
-          userChosenTask="Take Photo";
-          if(result)
-            cameraIntent();
-
-        } else if (items[item].equals("Choose from Library")) {
-          userChosenTask="Choose from Library";
-          if(result)
-            galleryIntent();
-
-        } else if (items[item].equals("Cancel")) {
-          dialog.dismiss();
+      if (items[item].equals("Take Photo")) {
+        userChosenTask = "Take Photo";
+        if (result) {
+          cameraIntent();
         }
+
+      } else if (items[item].equals("Choose from Library")) {
+        userChosenTask = "Choose from Library";
+        if (result) {
+          galleryIntent();
+        }
+
+      } else if (items[item].equals("Cancel")) {
+        dialog.dismiss();
       }
     });
     builder.show();
   } // end selectImage()
 
-  private void cameraIntent()
-  {
+  private void cameraIntent() {
     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     startActivityForResult(intent, REQUEST_CAMERA);
   }
 
-  private void galleryIntent()
-  {
+  private void galleryIntent() {
     Intent intent = new Intent();
     intent.setType("image/*");
     intent.setAction(Intent.ACTION_GET_CONTENT);//
-    startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+    startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+
   }
 
   @Override
@@ -211,10 +236,11 @@ public class MainActivity extends AppCompatActivity implements
     switch (requestCode) {
       case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          if(userChosenTask.equals("Take Photo"))
+          if (userChosenTask.equals("Take Photo")) {
             cameraIntent();
-          else if(userChosenTask.equals("Choose from Library"))
+          } else if (userChosenTask.equals("Choose from Library")) {
             galleryIntent();
+          }
         } else {
           //code for deny
         }
@@ -226,19 +252,30 @@ public class MainActivity extends AppCompatActivity implements
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (resultCode == Activity.RESULT_OK) {
-      if (requestCode == SELECT_FILE)
+      if (requestCode == SELECT_FILE) {
         onSelectFromGalleryResult(data);
-      else if (requestCode == REQUEST_CAMERA)
+      } else if (requestCode == REQUEST_CAMERA) {
         onCaptureImageResult(data);
+      }
     }
+
+    Transform transform = new Transform();
+    Image image = new Image();
+    long userId;
+    image.setId(getTaskId());
+
+    image.setTimestamp(new Date());
+    transformDB.getImageDao().insert(image);
+
   }
 
 
   private void onSelectFromGalleryResult(Intent data) {
-    Bitmap bm=null;
+    Bitmap bm = null;
     if (data != null) {
       try {
-        bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+        bm = MediaStore.Images.Media
+            .getBitmap(getApplicationContext().getContentResolver(), data.getData());
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -255,6 +292,10 @@ public class MainActivity extends AppCompatActivity implements
     FileOutputStream fo;
     try {
       destination.createNewFile();
+      destination.toURL();
+      Image image = new Image();
+      image.setInternalURL(destination.toString());
+      transformDB.getImageDao().insert(image);
       fo = new FileOutputStream(destination);
       fo.write(bytes.toByteArray());
       fo.close();
@@ -263,7 +304,8 @@ public class MainActivity extends AppCompatActivity implements
     } catch (IOException e) {
       e.printStackTrace();
     }
-    transformingImage.setImageBitmap(thumbnail); // Do I need an ImageView? Should I match AppGuruz layout?
+    transformingImage
+        .setImageBitmap(thumbnail); // Do I need an ImageView? Should I match AppGuruz layout?
   }
 
   private void signOut() {

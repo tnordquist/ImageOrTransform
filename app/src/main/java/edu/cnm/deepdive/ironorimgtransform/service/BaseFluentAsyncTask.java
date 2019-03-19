@@ -1,20 +1,4 @@
-package edu.cnm.deepdive.ironorimgtransform;
-
-/*
- *    Copyright 2019 Nicholas Bennett & Deep Dive Coding
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
+package edu.cnm.deepdive.ironorimgtransform.service;
 
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
@@ -69,33 +53,11 @@ import android.util.Log;
 public class BaseFluentAsyncTask<Params, Progress, Intermediate, Result>
     extends AsyncTask<Params, Progress, Result> {
 
-  private Performer<Params, Intermediate> performer = new Performer<Params, Intermediate>() {
-    @Override
-    public Intermediate perform(Params... params) throws TaskException {
-      return null;
-    }
-  };
-  private ProgressListener<Progress> progressListener = new ProgressListener<Progress>() {
-    @Override
-    public void update(Progress... values) {
-    }
-  };
-  private Transformer<Intermediate, Result> transformer = new Transformer<Intermediate, Result>() {
-    @Override
-    public Result transform(Intermediate intermediate) throws TaskException {
-      return (Result) intermediate;
-    }
-  };
-  private ResultListener<Result> successListener = new ResultListener<Result>() {
-    @Override
-    public void handle(Result result) {
-    }
-  };
-  private ResultListener<Result> failureListener = new ResultListener<Result>() {
-    @Override
-    public void handle(Result result) {
-    }
-  };
+  private Performer<Params, Intermediate> performer = (params) -> null;
+  private ProgressListener<Progress> progressListener = (values) -> {};
+  private Transformer<Intermediate, Result> transformer = (intermediate) -> (Result) intermediate;
+  private ResultListener<Result> successListener = (result) -> {};
+  private ResultListener<Result> failureListener = (result) -> {};
 
   /**
    * Executes basic processing of asynchronous task. This method will always be invoked on a

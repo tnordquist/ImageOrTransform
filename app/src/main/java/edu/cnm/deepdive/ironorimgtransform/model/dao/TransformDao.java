@@ -4,9 +4,11 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Transaction;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
 
 import android.arch.persistence.room.Dao;
+import edu.cnm.deepdive.ironorimgtransform.model.pojo.TransformWithAccesses;
 import java.util.List;
 
 /**
@@ -60,6 +62,18 @@ public interface TransformDao {
    */
   @Query("SELECT * FROM Transform ORDER BY name ASC")
   List<Transform> findAll();
+
+//  /**
+//   * Selects and returns all <code>Transform</code> instances in the local database, each with its
+//   * related <code>Image</code> instances (i.e. {@link TransformWithAccesses} instances), sorting the
+//   * result in descending date order.
+//   *
+//   * @return joined {@link TransformWithAccesses} instances.
+//   */
+//  @Transaction
+//  @Query("SELECT * FROM Transform ORDER BY date DESC")
+//  List<TransformWithAccesses> findAllWithAccesses();
+
 
   /**
    * Deletes one or more {@link Transform} instances from local database.

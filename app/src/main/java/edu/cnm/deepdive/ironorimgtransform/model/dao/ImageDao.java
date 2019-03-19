@@ -11,14 +11,17 @@ import java.util.List;
 @Dao
 public interface ImageDao {
 
-  @Insert
-  long insert(Image accesses);
+  static void  insert(long imageL_id) {
+  }
 
   @Insert
-  List<Long> insert(Image... accesses);
+  long insert(Image images);
 
   @Insert
-  List<Long> insert(List<Image> accesses);
+  List<Long> insert(Image... images);
+
+  @Insert
+  List<Long> insert(List<Image> images);
 
   /**
    * Selects and returns the single {@link Image} instance (or null) for the
