@@ -17,6 +17,7 @@ import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
 public class TransformPickerDialogFragment extends DialogFragment {
 
   private static final String TRANSFORM_OPERATION_KEY = "transform";
+  private static final String TRANSFORM_ID_KEY = "transformId";
   // Use this instance of the interface to deliver action events
   private BitmapAccess access;
 
@@ -26,9 +27,10 @@ public class TransformPickerDialogFragment extends DialogFragment {
 
 
   public static TransformPickerDialogFragment newInstance(
-      TransformOperation operation) {
+      TransformOperation operation, long transformId) {
     Bundle args = new Bundle();
     args.putSerializable(TRANSFORM_OPERATION_KEY, operation);
+    args.putLong(TRANSFORM_ID_KEY, transformId);
     TransformPickerDialogFragment fragment = new TransformPickerDialogFragment();
     fragment.setArguments(args);
     return fragment;
@@ -66,7 +68,7 @@ public class TransformPickerDialogFragment extends DialogFragment {
         .setPositiveButton(R.string.transforms_on, (dialog, which) -> {
           Bitmap result = operation.transform(access.getBitmap(), view);
           // TODO Update database, local storage.
-          access.setBitmap(result);
+          access.setBitmap(result, getArguments().getLong(TRANSFORM_ID_KEY));
         })
         .setNegativeButton(R.string.transforms_cancel,
             (dialog, which) -> {
@@ -74,14 +76,16 @@ public class TransformPickerDialogFragment extends DialogFragment {
     return builder.create();
   }
 
-  /* The activity that creates an instance of this dialog fragment must
-   * implement this interface in order to receive event callbacks.
-   * Each method passes the DialogFragment in case the host needs to query it. */
+  /**
+   * The activity that creates an instance of this dialog fragment must implement this interface in
+   * order to receive event callbacks. Each method passes the DialogFragment in case the host needs
+   * to query it.
+   */
   public interface BitmapAccess {
 
     Bitmap getBitmap();
 
-    void setBitmap(Bitmap bitmap);
+    void setBitmap(Bitmap bitmap, long aLong);
   }
 
 }

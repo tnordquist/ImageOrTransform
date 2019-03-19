@@ -13,7 +13,7 @@ public class GaussianBlur extends TransformOperation {
   @Override
   public Bitmap transform(Bitmap src, View view) {
     SeekBar standardDeviation = view.findViewById(R.id.standard_deviation);
-    int stDev = standardDeviation.getProgress();
+    float stDev = standardDeviation.getProgress();
     stDev = stDev / 3;
     Bitmap bitmap = super.transform(src, view);
     //pixelsArr(bitmap);

@@ -2,7 +2,6 @@ package edu.cnm.deepdive.ironorimgtransform.controller;
 
 import android.app.Activity;
 import android.arch.persistence.room.Room;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -34,15 +33,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Date;
 import java.util.List;
 import edu.cnm.deepdive.ironorimgtransform.service.GoogleSignInService;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 
 public class MainActivity extends AppCompatActivity implements
     OnMenuItemClickListener,
@@ -54,40 +47,38 @@ public class MainActivity extends AppCompatActivity implements
   private ImageView transformingImage;
   private String userChosenTask;
   private static TransformDB transformDB;
+  private static Transform transform;
   private Date date;
-
+  private long transId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    try (
-        InputStream input = getResources().openRawResource(R.raw.transforms);
-        Reader reader = new InputStreamReader(input);
-        CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT)
-    ) {
-      for (CSVRecord record : parser) {
-        String col0 = record.get(0);
-        String col1 = record.get(1);
-
-        // TODO Create entity instances, invoke setters to set fields from CSV
-        // data, use DAOs to write entity instances to DB(best if DAO provides
-        // an insert(List) form).
-      }
-    } catch (IOException e) {
-      Log.e("Something went wrong!", getClass().getSimpleName());
-    }
+    //
+    //        try (
+    //            InputStream input = getResources().openRawResource(R.raw.transforms);
+    //            Reader reader = new InputStreamReader(input);
+    //            CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT)
+    //        ) {
+    //          for (CSVRecord record : parser) {
+    //            String col0 = record.get(0);
+    //            String col1 = record.get(1);
+    //          }
+    //        } catch (IOException e) {
+    //          Log.e("Something went wrong!", getClass().getSimpleName());
+    //        }
 
     setContentView(R.layout.activity_main);
+    transformDB = Room.databaseBuilder(getApplicationContext(), TransformDB.class, "transform_db")
+        .allowMainThreadQueries()
+        .build();
     new TransformListQuery().execute();
     Button transformButton = findViewById(R.id.transform_button);
     transformingImage = findViewById(R.id.transforming_image);
     transformButton.setOnClickListener((v) -> showPopup(v));
     Button image = findViewById(R.id.image_button);
     image.setOnClickListener((v) -> selectImage());
-    transformDB = Room.databaseBuilder(getApplicationContext(), TransformDB.class, "transform_db")
-        .allowMainThreadQueries()
-        .build();
+
   }
 
   public void showPopup(View v) {
@@ -107,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements
                       .getClassLoader().loadClass(transform.getClazz());
               TransformOperation operation = clazz.newInstance();
               DialogFragment dialogFragment = TransformPickerDialogFragment
-                  .newInstance(operation);
+                  .newInstance(operation,transform.getId());
               dialogFragment.show(getSupportFragmentManager(),
                   dialogFragment.getClass().getSimpleName());
               return true;
@@ -125,8 +116,11 @@ public class MainActivity extends AppCompatActivity implements
     popup.show();
   }
 
+  /**
+   * Create an instance of the dialog fragment and show it.
+   */
   public void showNoticeDialog(String str) {
-    // Create an instance of the dialog fragment and show it.
+
     DialogFragment dialogFragment = new TransformPickerDialogFragment();
     dialogFragment.show(getSupportFragmentManager(), "Notice Dialog Fragment");
   }
@@ -142,13 +136,13 @@ public class MainActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void setBitmap(Bitmap bitmap) {
+  public void setBitmap(Bitmap bitmap, long transId) {
     transformingImage.setImageBitmap(bitmap);
 
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
     if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-      Log.v("TEST","Is writeable");
+      Log.v("TEST", "Is writeable");
     }
     File destination = new File(getExternalFilesDir(null),
         System.currentTimeMillis() + ".jpg");
@@ -165,11 +159,9 @@ public class MainActivity extends AppCompatActivity implements
       e.printStackTrace();
     }
     Image image = new Image();
-    image.setId(getTaskId());
-    image.setTransformId((long) getTaskId());
     image.setTimestamp(new Date());
     image.setInternalURL(destination.toString());
-    image.setTransformId((long) getTaskId());
+    image.setTransformId(transId);
     transformDB.getImageDao().insert(image);
   }
 
@@ -259,13 +251,12 @@ public class MainActivity extends AppCompatActivity implements
       }
     }
 
-    Transform transform = new Transform();
-    Image image = new Image();
-    long userId;
-    image.setId(getTaskId());
-
-    image.setTimestamp(new Date());
-    transformDB.getImageDao().insert(image);
+//    Transform transform = new Transform();
+//    Image image = new Image();
+//    long userId;;
+//    image.setTransformId();
+//    image.setTimestamp(new Date());
+//    transformDB.getImageDao().insert(image);
 
   }
 

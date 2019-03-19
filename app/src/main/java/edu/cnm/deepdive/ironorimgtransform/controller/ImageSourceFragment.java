@@ -31,26 +31,26 @@ public class ImageSourceFragment extends DialogFragment {
     access = (BitmapAccess) context;
   }
 
-  @NonNull
-  @Override
-  public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-
-    AlertDialog.Builder builder = new Builder(getActivity());
-    LayoutInflater inflater = requireActivity().getLayoutInflater();
-
-    View view = inflater.inflate(operation.getLayout(), null);
-    builder.setView(view)
-        .setPositiveButton("Image", (dialog, which) -> {
-          Bitmap result = operation.transform(access.getBitmap(), view);
-          // TODO Update database, local storage.
-          access.setBitmap(result);
-        })
-        .setNegativeButton("Cancel", ((dialog, which) -> {
-
-        }));
-    builder.setTitle("The image");
-    return builder.create();
-  }
+//  @NonNull
+//  @Override
+//  public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+//
+//    AlertDialog.Builder builder = new Builder(getActivity());
+//    LayoutInflater inflater = requireActivity().getLayoutInflater();
+//
+//    View view = inflater.inflate(operation.getLayout(), null);
+//    builder.setView(view)
+//        .setPositiveButton("Image", (dialog, which) -> {
+//          Bitmap result = operation.transform(access.getBitmap(), view);
+//          // TODO Update database, local storage.
+//          access.setBitmap(result, getArguments().getLong(TRANSFORM_ID_KEY));
+//        })
+//        .setNegativeButton("Cancel", ((dialog, which) -> {
+//
+//        }));
+//    builder.setTitle("The image");
+//    return builder.create();
+//  }
 
   public interface ImageAcquisition {
 
