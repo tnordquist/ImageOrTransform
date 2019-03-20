@@ -54,19 +54,6 @@ public class MainActivity extends AppCompatActivity implements
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    //
-    //        try (
-    //            InputStream input = getResources().openRawResource(R.raw.transforms);
-    //            Reader reader = new InputStreamReader(input);
-    //            CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT)
-    //        ) {
-    //          for (CSVRecord record : parser) {
-    //            String col0 = record.get(0);
-    //            String col1 = record.get(1);
-    //          }
-    //        } catch (IOException e) {
-    //          Log.e("Something went wrong!", getClass().getSimpleName());
-    //        }
 
     setContentView(R.layout.activity_main);
     transformDB = Room.databaseBuilder(getApplicationContext(), TransformDB.class, "transform_db")
