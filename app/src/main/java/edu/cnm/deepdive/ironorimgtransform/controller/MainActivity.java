@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,9 +48,8 @@ public class MainActivity extends AppCompatActivity implements
   private ImageView transformingImage;
   private String userChosenTask;
   private static TransformDB transformDB;
-  private static Transform transform;
-  private Date date;
-  private long transId;
+  private static Button imgHistory;
+  private static final String TAG = "MainActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,19 @@ public class MainActivity extends AppCompatActivity implements
     Button image = findViewById(R.id.image_button);
     image.setOnClickListener((v) -> selectImage());
 
+    imgHistory = findViewById(R.id.history_button);
+    imgHistory.setOnClickListener(view -> {
+      Log.d(TAG, "onCreate: click");
+     // startActivity(new Intent(MainActivity.this, HistoryFragment.class));
+    });
+
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    return super.onCreateOptionsMenu(menu);
+    // instead of button add options item\
+    // use onoptions menu item selected: this is like the click listener
   }
 
   public void showPopup(View v) {
