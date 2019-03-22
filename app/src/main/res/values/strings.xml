@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">IronOrImgTransform</string>
+  <string name="app_name">ImageOrTransform</string>
 
   <string name="transforms_on">On</string>
   <string name="transforms_cancel">Cancel</string>

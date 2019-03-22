@@ -72,8 +72,8 @@ public interface TransformDao {
 //   */
 //  @Transaction
 //  @Query("SELECT * FROM Transform ORDER BY date DESC")
-//  List<TransformWithAccesses> findAllWithAccesses();
-
+//  List<TransformWithAccesses> findAllWithTransforms();
+//
 
   /**
    * Deletes one or more {@link Transform} instances from local database.

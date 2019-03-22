@@ -27,6 +27,7 @@ import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
+import edu.cnm.deepdive.ironorimgtransform.service.BaseFluentAsyncTask;
 import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
 import edu.cnm.deepdive.ironorimgtransform.service.Utility;
 import java.io.ByteArrayOutputStream;
@@ -56,9 +57,7 @@ public class MainActivity extends AppCompatActivity implements
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.activity_main);
-    transformDB = Room.databaseBuilder(getApplicationContext(), TransformDB.class, "transform_db")
-        .allowMainThreadQueries()
-        .build();
+    transformDB = TransformDB.getInstance();
     new TransformListQuery().execute();
     Button transformButton = findViewById(R.id.transform_button);
     transformingImage = findViewById(R.id.transforming_image);
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements
     imgHistory = findViewById(R.id.history_button);
     imgHistory.setOnClickListener(view -> {
       Log.d(TAG, "onCreate: click");
-     // startActivity(new Intent(MainActivity.this, HistoryFragment.class));
+     startActivity(new Intent(MainActivity.this, History.class));
     });
 
   }
@@ -162,7 +161,9 @@ public class MainActivity extends AppCompatActivity implements
     image.setTimestamp(new Date());
     image.setInternalURL(destination.toString());
     image.setTransformId(transId);
-    transformDB.getImageDao().insert(image);
+    new BaseFluentAsyncTask<Void, Void, Long, Long>()
+        .setPerformer((ignore) -> transformDB.getImageDao().insert(image))
+        .execute();
   }
 
   private class TransformListQuery extends

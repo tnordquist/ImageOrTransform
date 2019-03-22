@@ -13,11 +13,12 @@ public class GaussianBlur extends TransformOperation {
   @Override
   public Bitmap transform(Bitmap src, View view) {
     SeekBar standardDeviation = view.findViewById(R.id.standard_deviation);
-    float stDev = standardDeviation.getProgress();
+    int stDev = standardDeviation.getProgress();
+
     stDev = stDev / 3;
     Bitmap bitmap = super.transform(src, view);
     //pixelsArr(bitmap);
-    bitmap = fastblur(src, stDev, 10);
+    bitmap = fastblur(src, 1f, stDev + 1);
     return bitmap;
     // TODO query view to get values of ui controls and create new bitmap accordingly
 
@@ -27,17 +28,6 @@ public class GaussianBlur extends TransformOperation {
   public int getLayout() {
     return R.layout.fragment_gaussian_blur;
   }
-
-//  private int[][] pixelsArr(Bitmap src) {
-//
-//    int[][] pixelsArr = new int[src.getWidth()][src.getHeight()];
-//
-//    for (int row = 0; row < src.getHeight(); ++row) {
-//      src.getPixels(pixelsArr[row], 0, src.getWidth(), 0, row, src.getWidth(),
-//          1);
-//    }
-//    return pixelsArr;
-//  }
 
   public Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
 

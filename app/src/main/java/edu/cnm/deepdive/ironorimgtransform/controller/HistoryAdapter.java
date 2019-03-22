@@ -1,7 +1,5 @@
 package edu.cnm.deepdive.ironorimgtransform.controller;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,36 +8,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.cnm.deepdive.ironorimgtransform.R;
-import java.util.ArrayList;
-
+import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
+import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+
   private static final String TAG = "position";
-  ArrayList<String> userImages;
+  List<Image> userImages;
 
-  RecyclerView recyclerView;
-
-  public HistoryAdapter(ArrayList<String> userImages) {
+  public HistoryAdapter(List<Image> userImages) {
     this.userImages = userImages;
   }
 
   @NonNull
   @Override
-  public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-    View view = LayoutInflater.from(viewGroup.getContext())
-        .inflate(R.layout.image_row, recyclerView, false);
-    Log.d(TAG, "what is position?: " + position);
+  public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View view = LayoutInflater.from(parent.getContext())
+        .inflate(R.layout.image_row, parent, false);
+    Log.d(TAG, "what is position?: " + viewType);
     return new ViewHolder(view);
   }
 
   @Override
   public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder viewHolder, int position) {
-    viewHolder.image_item.setText(userImages.get(position));
+    viewHolder.image_item.setText(userImages.get(position).getInternalURL());
   }
 
   @Override
   public int getItemCount() {
-
     return userImages.size();
   }
 

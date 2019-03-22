@@ -13,9 +13,9 @@
   <application
     android:name=".TransformApplication"
     android:allowBackup="false"
-    android:icon="@mipmap/ic_launcher"
+    android:icon="@mipmap/transform_icon"
     android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
+    android:roundIcon="@mipmap/transform_icon_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity android:name=".controller.MainActivity"/>
@@ -28,6 +28,7 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <activity android:name=".controller.History"/>
   </application>
 
 </manifest>

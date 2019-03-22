@@ -17,10 +17,9 @@ import java.util.Date;
 import java.util.concurrent.Executors;
 
 /**
- * Defines the local database as a collection of its entities and converters,
- * with the singleton pattern implemented for app-wide use of a single
- * connection, and declares methods to retrieve data access objects (DAOs) for
- * the database entities.
+ * Defines the local database as a collection of its entities and converters, with the singleton
+ * pattern implemented for app-wide use of a single connection, and declares methods to retrieve
+ * data access objects (DAOs) for the database entities.
  */
 @Database(
     entities = {Transform.class, Image.class},
@@ -34,8 +33,7 @@ public abstract class TransformDB extends RoomDatabase {
   private static final String DB_NAME = "transform_db";
 
   /**
-   * Returns the single instance of {@link TransformDB} for the current
-   * application context.
+   * Returns the single instance of {@link TransformDB} for the current application context.
    *
    * @return single {@link TransformDB} instance reference.
    */
@@ -44,11 +42,9 @@ public abstract class TransformDB extends RoomDatabase {
   }
 
   /**
-   * Returns an instance of a Room-generated implementation of {@link
-   * TransformDao}.
+   * Returns an instance of a Room-generated implementation of {@link TransformDao}.
    *
-   * @return data access object for CRUD operations involving {@link Transform}
-   * instances.
+   * @return data access object for CRUD operations involving {@link Transform} instances.
    */
   public abstract TransformDao getTransformDao();
 
@@ -68,11 +64,10 @@ public abstract class TransformDB extends RoomDatabase {
   public static class Converters {
 
     /**
-     * Converts an {@link Date} value containing the specific instant in time,
-     * with millisecond precision..
+     * Converts an {@link Date} value containing the specific instant in time, with millisecond
+     * precision..
      *
-     * @param time local date as a number of days since the start of the Unix
-     * epoch.
+     * @param time local date as a number of days since the start of the Unix epoch.
      * @return time as a {@link Date} instance.
      */
     @TypeConverter
@@ -81,9 +76,9 @@ public abstract class TransformDB extends RoomDatabase {
     }
 
     /**
-     * Converts a {@link Date} local date value to a number of days since the
-     * start of the Unix epoch (1970-01-01), and returns the latter. Both of
-     * these are interpreted as local dates, with no reference to time zone.
+     * Converts a {@link Date} local date value to a number of days since the start of the Unix
+     * epoch (1970-01-01), and returns the latter. Both of these are interpreted as local dates,
+     * with no reference to time zone.
      *
      * @param date local date as a {@link Date} instance.
      * @return local date as a number of days since the start of the Unix epoch.
@@ -123,14 +118,5 @@ public abstract class TransformDB extends RoomDatabase {
     }
 
   }
-
-//  private static class PreloadTask extends BaseFluentAsyncTask<Void, Void, List<Transform>, List<Transform>>{
-//
-//    @Nullable
-//    @Override
-//    protected List<Transform> per
-//
-//  }
-
 
 }

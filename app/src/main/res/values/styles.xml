@@ -8,11 +8,6 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
-  <!--<style name="NumberStyle" parent="AppTheme">-->
-    <!--<item name="android:textSize">80sp</item>-->
-    <!--<item name="android:textColor">@color/numberColor</item>-->
-  <!--</style>-->
-
   <style name="TallyStyle" parent="AppTheme">
     <item name="android:textSize">20sp</item>
   </style>

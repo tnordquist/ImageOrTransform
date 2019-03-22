@@ -5,11 +5,6 @@ import edu.cnm.deepdive.android.BaseFluentAsyncTask;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
-import edu.cnm.deepdive.ironorimgtransform.model.pojo.TransformWithAccesses;
-import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
-import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
-import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
-import edu.cnm.deepdive.ironorimgtransform.model.pojo.TransformWithAccesses;
 import edu.cnm.deepdive.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,7 +79,7 @@ public final class TransformDBService {
    * Implements an asynchronous <code>SELECT</code> of all {@link Transform} instances (sorted in
    * descending date order) from the local database.
    */
-  public static class SelectAllApodTask
+  public static class SelectAllTrasformTask
       extends BaseFluentAsyncTask<Void, Void, List<Transform>, List<Transform>> {
 
     @Override
@@ -94,21 +89,11 @@ public final class TransformDBService {
 
   }
 
-  public static class SelectAllApodWithAccessesTask
-      extends BaseFluentAsyncTask<Void, Void, List<TransformWithAccesses>, List<TransformWithAccesses>> {
-
-//    @Override
-//    protected List<TransformWithAccesses> perform(Void... voids) {
-//      return TransformDB.getInstance().getTransformDao().findAllWithAccesses();
-//    }
-
-  }
-
   /**
    * Implements an asynchronous <code>DELETE</code> of one or more {@link Image} instances from the
    * local database.
    */
-  public static class DeleteApodTask extends BaseFluentAsyncTask<Transform, Void, Void, Void> {
+  public static class DeleteTransformTask extends BaseFluentAsyncTask<Transform, Void, Void, Void> {
 
     @Nullable
     @Override
@@ -123,13 +108,13 @@ public final class TransformDBService {
    * Implements an asynchronous <code>INSERT</code> of one or more {@link Image} instances into the
    * local database.
    */
-  public static class InsertAccessTask
-      extends BaseFluentAsyncTask<Image, Void, List<Long>, List<Long>> {
+  public static class GetHistoryTask
+      extends BaseFluentAsyncTask<Image, Void, List<Image>, List<Image>> {
 
     @Nullable
     @Override
-    protected List<Long> perform(Image... images) throws TaskException {
-      return TransformDB.getInstance().getImageDao().insert(images);
+    protected List<Image> perform(Image... images) throws TaskException {
+      return TransformDB.getInstance().getImageDao().findHistory(50);
     }
 
   }

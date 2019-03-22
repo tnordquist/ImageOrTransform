@@ -11,9 +11,6 @@ import java.util.List;
 @Dao
 public interface ImageDao {
 
-  static void  insert(long imageL_id) {
-  }
-
   @Insert
   long insert(Image images);
 
@@ -70,5 +67,5 @@ public interface ImageDao {
    */
   @Delete
   int delete(Image... images);
-
 }
+
