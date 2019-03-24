@@ -13,6 +13,10 @@ import edu.cnm.deepdive.ironorimgtransform.service.TransformDBService.GetHistory
 import edu.cnm.deepdive.ironorimgtransform.view.HistoryAdapter;
 import java.util.List;
 
+/**
+ * This {@link android.app.Activity} exists to make a {@link android.view.View} needed to display
+ * the {@link RecyclerView} for displaying the history of user transformed images.
+ */
 public class History extends AppCompatActivity {
 
   RecyclerView recyclerview;
@@ -26,7 +30,7 @@ public class History extends AppCompatActivity {
     recyclerview = findViewById(R.id.recycler_view);
 
     TransformDB db = TransformDB.getInstance();
-    new GetHistoryTask().setSuccessListener(new ResultListener<List<Image>>(){
+    new GetHistoryTask().setSuccessListener(new ResultListener<List<Image>>() {
       @Override
       public void handle(List<Image> images) {
         recyclerview.setLayoutManager(new LinearLayoutManager(History.this));

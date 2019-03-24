@@ -13,30 +13,37 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
 
+/**
+ * Displays an alert dialog which provides user choices for type of transform to be applied to the
+ * chosen image.  The dialog presents the user with settings for inputting data needed to determine
+ * the way the transform alogorithm will be applied to the image.  The user has the option to click
+ * on to set the transformation into process or to cancel the transform option chosen.
+ */
 public class TransformPickerDialogFragment extends DialogFragment {
 
   private static final String TRANSFORM_OPERATION_KEY = "transform";
   private static final String TRANSFORM_ID_KEY = "transformId";
   // Use this instance of the interface to deliver action events
   private BitmapAccess access;
-
   private TransformOperation operation;
-
-  private EditText x;
-
-  private SharedPreferences getSharedPreferences;
   private SharedPreferences preferences;
   private static final String PROGRESS = "SEEKBAR";
-  private long save;
 
 
-  public static TransformPickerDialogFragment newInstance(
+  /**
+   * Constructs an instance of the alert dialog which is tailored according to the type of transform
+   * operation chosen by the user.
+   *
+   * @param operation passes in instance of {@link TransformOperation} which contains methods
+   * responsible for getting the correct dialog layout and the associated bitmap.
+   * @param transformId the id of the transform type being applied to the image.
+   */
+  static TransformPickerDialogFragment newInstance(
       TransformOperation operation, long transformId) {
     Bundle args = new Bundle();
     args.putSerializable(TRANSFORM_OPERATION_KEY, operation);
@@ -54,7 +61,9 @@ public class TransformPickerDialogFragment extends DialogFragment {
 
   }
 
-  // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
+  /**
+   * Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
+   */
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);

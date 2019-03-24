@@ -8,15 +8,40 @@ import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Declares basic CRUD operations for {@link Image} instances in the local database, using Room
+ * annotations.
+ */
 @Dao
 public interface ImageDao {
 
+  /**
+   * Inserts one {@link Image} instances into the local database. Any primary or unique key
+   * constraint violations will result in the existing records being retained.
+   *
+   * @param images {@link Image} instance to be inserted.
+   * @return inserted record ID.
+   */
   @Insert
   long insert(Image images);
 
+  /**
+   * Inserts one or more {@link Image} instances into the local database. Any primary or unique key
+   * constraint violations will result in the existing records being retained.
+   *
+   * @param images {@link Image} instance(s) to be inserted.
+   * @return inserted record ID(s).
+   */
   @Insert
   List<Long> insert(Image... images);
 
+  /**
+   * Inserts a {@link List} of  {@link Image} instances into the local database. Any primary or unique key
+   * constraint violations will result in the existing records being retained.
+   *
+   * @param images {@link Image} instance(s) contained in a {@link List}  to be inserted.
+   * @return inserted {@link List} of record ID(s).
+   */
   @Insert
   List<Long> insert(List<Image> images);
 

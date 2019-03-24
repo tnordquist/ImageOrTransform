@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity implements
    */
   private static Button imgHistory;
 
+  /**
+   * Handles a click on a button which starts the {@link History} activity which sets into motion
+   * the set up of the {@link android.support.v7.widget.RecyclerView} for displaying a list of the
+   * images transformed.  Listeners are also set on the transform menu button and the image
+   * selection button.
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -110,8 +116,6 @@ public class MainActivity extends AppCompatActivity implements
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     return super.onCreateOptionsMenu(menu);
-    // instead of button add options item\
-    // use onoptions menu item selected: this is like the click listener
   }
 
   /**
@@ -175,6 +179,13 @@ public class MainActivity extends AppCompatActivity implements
     return ((BitmapDrawable) transformingImage.getDrawable()).getBitmap();
   }
 
+  /**
+   * This method makes it easy to load a bitmap of arbitrarily large size into a file.  This method
+   * is also used to set data regarding the {@link Image} entity into the data base.
+   *
+   * @param bitmap bitmap to be compressed and stored in the gallery file and in the database.
+   * @param transId the id of the type of transform applied to the image.
+   */
   @Override
   public void setBitmap(Bitmap bitmap, long transId) {
     transformingImage.setImageBitmap(bitmap);
@@ -182,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
     if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-      Log.v("TEST", "Is writeable");
     }
     File destination = new File(getExternalFilesDir(null),
         System.currentTimeMillis() + ".jpg");
@@ -275,6 +285,15 @@ public class MainActivity extends AppCompatActivity implements
 
   }
 
+  /**
+   * onRequestPermissionsResult() is inbuilt method which receives a callback of this dialog action
+   * for particular activity from which checkPermssion() has been called.If permission has been
+   * granted then the value of grantResults[0] would be PERMISSION_GRANTED. And if permission has
+   * been revoked then the value of grantResults[0] would be PERMISSION_DENIED.
+   *
+   * Here, if permission has been granted, then the method for the specific {@link Intent} is
+   * invoked according to the value of the userChosenTask variable.
+   */
   @Override
   public void onRequestPermissionsResult(int requestCode,
       @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -293,6 +312,17 @@ public class MainActivity extends AppCompatActivity implements
     }
   }
 
+  /**
+   * The image either from camera or from gallery, is handled here. Handle the result received by
+   * calling startActivityForResult() Method.
+   *
+   * @param requestCode The request code is what has been passed to startActivityForResult(). In
+   * this case it is REQUEST_CAMERA.
+   * @param resultCode RESULT_OK if the operation was successful or RESULT_CANCEL if the operation
+   * was somehow cancelled or unsuccessful.
+   * @param data The intent carries the result data – in this case it is the image captured from the
+   * camera.
+   */
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
@@ -325,10 +355,11 @@ public class MainActivity extends AppCompatActivity implements
     transformingImage.setImageBitmap(bm);
   }
 
+
   private void onCaptureImageResult(Intent data) {
     Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+    thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, bytes);
     File destination = new File(Environment.getExternalStorageDirectory(),
         System.currentTimeMillis() + ".jpg");
     FileOutputStream fo;
@@ -347,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements
       e.printStackTrace();
     }
     transformingImage
-        .setImageBitmap(thumbnail); // Do I need an ImageView? Should I match AppGuruz layout?
+        .setImageBitmap(thumbnail);
   }
 
   private void signOut() {

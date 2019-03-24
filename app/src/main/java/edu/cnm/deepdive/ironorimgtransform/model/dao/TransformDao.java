@@ -4,11 +4,8 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Transaction;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
-
 import android.arch.persistence.room.Dao;
-import edu.cnm.deepdive.ironorimgtransform.model.pojo.TransformWithAccesses;
 import java.util.List;
 
 /**
@@ -33,11 +30,11 @@ public interface TransformDao {
 
 
   /**
-   * For inserting multiple {@Transform} instances into the local database.Any
+   * For inserting multiple {@link Transform} instances into the local database.Any
    * primary or unique key constraint violations will result in the existing *
    * records being retained.
    *
-   * @param transforms {@Link Transform} instances(s)
+   * @param transforms {@link Transform} instances(s)
    * @return inserted records.
    */
   @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -62,18 +59,6 @@ public interface TransformDao {
    */
   @Query("SELECT * FROM Transform ORDER BY name ASC")
   List<Transform> findAll();
-
-//  /**
-//   * Selects and returns all <code>Transform</code> instances in the local database, each with its
-//   * related <code>Image</code> instances (i.e. {@link TransformWithAccesses} instances), sorting the
-//   * result in descending date order.
-//   *
-//   * @return joined {@link TransformWithAccesses} instances.
-//   */
-//  @Transaction
-//  @Query("SELECT * FROM Transform ORDER BY date DESC")
-//  List<TransformWithAccesses> findAllWithTransforms();
-//
 
   /**
    * Deletes one or more {@link Transform} instances from local database.
