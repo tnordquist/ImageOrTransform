@@ -11,10 +11,22 @@ import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import java.util.List;
 
+/**
+ * Supplies {@link View} instances&mdash;each presenting an {@link edu.cnm.deepdive.ironorimgtransform.model.entity.Transform}
+ * instance, to a {@link RecyclerView}.
+ */
+
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
   private static final String TAG = "position";
-  List<Image> userImages;
+  private List<Image> userImages;
+
+  /**
+   * Initializes {@link HistoryAdapter} instance with the specified {@link List}&lt;{@link
+   * edu.cnm.deepdive.ironorimgtransform.model.entity.Image}&gt; data source.
+   *
+   * @param userImages source of {@link Image} instances.
+   */
 
   public HistoryAdapter(List<Image> userImages) {
     this.userImages = userImages;
@@ -25,7 +37,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
   public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext())
         .inflate(R.layout.image_row, parent, false);
-    Log.d(TAG, "what is position?: " + viewType);
     return new ViewHolder(view);
   }
 

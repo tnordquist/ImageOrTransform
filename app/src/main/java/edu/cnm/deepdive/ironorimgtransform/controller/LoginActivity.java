@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -15,6 +13,9 @@ import com.google.android.gms.tasks.Task;
 import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.service.GoogleSignInService;
 
+/**
+ * This activity integrates google sign in capability for this Android app.
+ */
 public class LoginActivity extends AppCompatActivity {
 
   private static final int LOGIN_REQUEST_CODE = 1000;

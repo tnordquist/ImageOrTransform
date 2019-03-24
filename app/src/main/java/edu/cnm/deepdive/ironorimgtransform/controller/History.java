@@ -29,7 +29,6 @@ public class History extends AppCompatActivity {
 
     recyclerview = findViewById(R.id.recycler_view);
 
-    TransformDB db = TransformDB.getInstance();
     new GetHistoryTask().setSuccessListener(new ResultListener<List<Image>>() {
       @Override
       public void handle(List<Image> images) {

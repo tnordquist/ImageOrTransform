@@ -10,8 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Provides a service layer for accessing the {@link TransformDB} Room/SQLite database. Each operation is
- * implemented as a static nested class that extends {@link BaseFluentAsyncTask}.
+ * Provides a service layer for accessing the {@link TransformDB} Room/SQLite database. Each
+ * operation is implemented as a static nested class that extends {@link BaseFluentAsyncTask}.
  */
 public final class TransformDBService {
 
@@ -61,19 +61,7 @@ public final class TransformDBService {
    */
   public static class SelectApodTask extends BaseFluentAsyncTask<Date, Void, Transform, Transform> {
 
-//    @Override
-//  protected Transform perform(Date... dates) {
-//    Transform transform =TransformDB.getInstance().getTransformDao().findFirstByDate(dates[0]);
-//    if (transform == null) {
-//      throw new TaskException();
-//    }
-//    Image access = new Image();
-//    access.setApodId(transform.getId());
-//    ApodDB.getInstance().getAccessDao().insert(access);
-//    return apod;
-//  }
-
-}
+  }
 
   /**
    * Implements an asynchronous <code>SELECT</code> of all {@link Transform} instances (sorted in

@@ -6,29 +6,32 @@ import android.view.View;
 import android.widget.SeekBar;
 import edu.cnm.deepdive.ironorimgtransform.R;
 
+/**
+ * This class extends the TransformOperation class.  It overrides the transform method which
+ * provides the means by which the specific information needed by this this transform type.  It
+ * contains the specific algorithm by which the GaussiaBlur functions.  Also, it contains the
+ * getLayout() method by which it's appropriate layout is called.
+ */
 public class GaussianBlur extends TransformOperation {
 
-  public final int TRANS_DEV = 3;
+  private final int TRANS_DEV = 3;
 
   @Override
   public Bitmap transform(Bitmap src, View view) {
     SeekBar standardDeviation = view.findViewById(R.id.standard_deviation);
     int stDev = standardDeviation.getProgress();
 
-    stDev = stDev / 3;
+    stDev = stDev / TRANS_DEV;
     Bitmap bitmap = super.transform(src, view);
     //pixelsArr(bitmap);
     bitmap = fastblur(src, 1f, stDev + 1);
     return bitmap;
-    // TODO query view to get values of ui controls and create new bitmap accordingly
-
   }
 
   @Override
   public int getLayout() {
     return R.layout.fragment_gaussian_blur;
   }
-
 
   private Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
 
