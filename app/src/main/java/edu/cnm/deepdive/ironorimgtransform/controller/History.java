@@ -1,23 +1,16 @@
 package edu.cnm.deepdive.ironorimgtransform.controller;
 
-import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import com.google.android.gms.tasks.OnSuccessListener;
 import edu.cnm.deepdive.android.BaseFluentAsyncTask.ResultListener;
 import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.service.TransformDBService.GetHistoryTask;
-import java.util.ArrayList;
+import edu.cnm.deepdive.ironorimgtransform.view.HistoryAdapter;
 import java.util.List;
 
 public class History extends AppCompatActivity {

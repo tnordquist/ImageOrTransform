@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.ironorimgtransform.controller;
 
 import android.app.Activity;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -39,18 +38,54 @@ import java.util.Date;
 import java.util.List;
 import edu.cnm.deepdive.ironorimgtransform.service.GoogleSignInService;
 
+/**
+ * Primary controller class of the ImageOrTransform app. This activity configures and then responds
+ * to clicks on button views at the bottom of the view screen one to display a pop up menu giving
+ * option to activate an image tranforming algorithm. The other button view at the bottom of the
+ * screen responds to a click by displaying an alert dialog which gives the user the option to
+ * choose an image stored in the gallery or to use the camera to generate an image to be
+ * transformed.  A click of the third button, at the top of the screen, opens an activity which
+ * displays links to each image that has been transformed by the user.
+ */
 public class MainActivity extends AppCompatActivity implements
     OnMenuItemClickListener,
     TransformPickerDialogFragment.BitmapAccess {
 
+  /**
+   * This field set when user chooses to access an image file.
+   */
   private static final int SELECT_FILE = 1;
+
+  /**
+   * This field set when user chooses to access the camera.
+   */
   private static final int REQUEST_CAMERA = 2;
+
+  /**
+   * List which holds instances of image transform algorithms.
+   */
   private List<Transform> transforms;
+
+  /**
+   * The view used to display the popup menu of image transform types.
+   */
   private ImageView transformingImage;
+
+  /**
+   * String value which indicates whether the {@link #galleryIntent()} or the {@link
+   * #cameraIntent()} is to be invoked.
+   */
   private String userChosenTask;
+
+  /**
+   * Used to create an instance of the {@link TransformDB} object.
+   */
   private static TransformDB transformDB;
+
+  /**
+   * Used to create a button instance for click accessing a user's history of image transforms.
+   */
   private static Button imgHistory;
-  private static final String TAG = "MainActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +102,7 @@ public class MainActivity extends AppCompatActivity implements
 
     imgHistory = findViewById(R.id.history_button);
     imgHistory.setOnClickListener(view -> {
-      Log.d(TAG, "onCreate: click");
-     startActivity(new Intent(MainActivity.this, History.class));
+      startActivity(new Intent(MainActivity.this, History.class));
     });
 
   }
@@ -80,7 +114,14 @@ public class MainActivity extends AppCompatActivity implements
     // use onoptions menu item selected: this is like the click listener
   }
 
-  public void showPopup(View v) {
+  /**
+   * Sets the popup menu to display choices of transform operations.  Inflates the chosen {@link
+   * TransformPickerDialogFragment} alert dialog so that user can enter information needed for the
+   * chosen transform type.
+   *
+   * @param v current {@link View} instance of popup menu.
+   */
+  private void showPopup(View v) {
     PopupMenu popup = new PopupMenu(this, v);
     // TODO read from database instead of inflating.
     MenuInflater inflater = popup.getMenuInflater();
@@ -97,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements
                       .getClassLoader().loadClass(transform.getClazz());
               TransformOperation operation = clazz.newInstance();
               DialogFragment dialogFragment = TransformPickerDialogFragment
-                  .newInstance(operation,transform.getId());
+                  .newInstance(operation, transform.getId());
               dialogFragment.show(getSupportFragmentManager(),
                   dialogFragment.getClass().getSimpleName());
               return true;
@@ -182,6 +223,10 @@ public class MainActivity extends AppCompatActivity implements
 
   }
 
+  /**
+   * Alert dialog which invokes {@link #galleryIntent()} or {@link #cameraIntent()} or cancels the
+   * dialog depending on the choice of the user.
+   */
   private void selectImage() {
     final CharSequence[] items = {"Take Photo", "Choose from Library",
         "Cancel"};
@@ -210,11 +255,18 @@ public class MainActivity extends AppCompatActivity implements
     builder.show();
   } // end selectImage()
 
+  /**
+   * This method, when invoked, activates an intent which provides access to the camera.
+   */
   private void cameraIntent() {
     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     startActivityForResult(intent, REQUEST_CAMERA);
   }
 
+  /**
+   * This method, when invoked, activates an intent which provides access to the image gallery
+   * files.
+   */
   private void galleryIntent() {
     Intent intent = new Intent();
     intent.setType("image/*");
@@ -251,17 +303,15 @@ public class MainActivity extends AppCompatActivity implements
         onCaptureImageResult(data);
       }
     }
-
-//    Transform transform = new Transform();
-//    Image image = new Image();
-//    long userId;;
-//    image.setTransformId();
-//    image.setTimestamp(new Date());
-//    transformDB.getImageDao().insert(image);
-
   }
 
-
+  /**
+   * Sets a Bitmap as the content of this ImageView when the user has chosen to select a file from
+   * the gallery.
+   *
+   * @param data Intent passed to this method when invoked in {@link #onActivityResult(int, int,
+   * Intent)} containing information regarding the particular image file chosen.
+   */
   private void onSelectFromGalleryResult(Intent data) {
     Bitmap bm = null;
     if (data != null) {

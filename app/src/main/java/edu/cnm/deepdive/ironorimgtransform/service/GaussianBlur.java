@@ -29,7 +29,8 @@ public class GaussianBlur extends TransformOperation {
     return R.layout.fragment_gaussian_blur;
   }
 
-  public Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
+
+  private Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
 
     int width = Math.round(sentBitmap.getWidth() * scale);
     int height = Math.round(sentBitmap.getHeight() * scale);

@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
 
@@ -29,7 +28,7 @@ public class TransformPickerDialogFragment extends DialogFragment {
 
   private TransformOperation operation;
 
-  private EditText x; // TODO and. ch7 wiring up widget: do I do this?
+  private EditText x;
 
   private SharedPreferences getSharedPreferences;
   private SharedPreferences preferences;

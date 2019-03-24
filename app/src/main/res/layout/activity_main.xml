@@ -9,12 +9,12 @@
   tools:context=".controller.MainActivity">
 
   <ImageView
-  android:id="@+id/transforming_image"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
+    android:id="@+id/transforming_image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:scaleType="fitCenter"
-  android:src="@drawable/test_source"
-  />
+    android:src="@drawable/test_source"
+    />
 
   <FrameLayout
     android:id="@+id/fragment_container"
