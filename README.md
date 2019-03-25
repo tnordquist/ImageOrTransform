@@ -20,27 +20,31 @@ There are two main deficiencies regarding the completion of this app: the techni
 
 This app has been extensively testing on a Samsung tablet, SM-T 380 (Android 8.1.0, API 27).  It has also been testing using the Android Studio Emulator running API 28 on a Nexus 5X emulation.  Minimum API is 21.  At present, there are not any known Android devices that do not support this app, so long as the minimum Android API is met and the user gives the required permissions. The app currently supports english only.
 
-## Third Party Libraries
-```
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation 'org.apache.commons:commons-csv:1.6'
-    implementation 'com.github.deep-dive-coding-java:android-utilities:1.0.3'
-    implementation 'com.github.deep-dive-coding-java:date-utilities:1.0.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation 'com.facebook.stetho:stetho:1.5.0'
-    implementation 'android.arch.persistence.room:runtime:1.1.1'
-    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    testImplementation 'junit:junit:4.12'
+The Javadoc HTML for this project has been generated on OSX  with the following command line arguments. 
+(Note that all arguments are specified on a single line for execution, but they're written on multiple lines for clarity here. Multiple options can also be specified in an options file, using the `@files` option.)
+
  ```
+ -bootclasspath /Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/jre/lib/rt.jar:/opt/android/sdk/platforms/android-21/android.jar 
+ -link https://docs.oracle.com/javase/8/docs/api/ 
+ -link https://google.github.io/gson/apidocs/ 
+ -link https://square.github.io/retrofit/2.x/converter-gson/ 
+ -link http://square.github.io/retrofit/2.x/retrofit/ 
+ -link https://square.github.io/okhttp/3.x/okhttp/ 
+ -linkoffline https://developer.android.com/reference /opt/android/sdk/docs/reference 
+ -windowtitle "ImageOrTransform"
+ ```
+
+## User Stories
+
+
     
-## DDL for Data Model
-[DDL](docs/ddl.md)
+## [DDL](docs/ddl.md) 
+
+Links to the apps data model.
+
+## [**Javadoc**](docs/api)
+
+Links to generated Javadoc HTML pages in repository.
 
 ### What’s the basic functionality of the app?
 The app will allow the user to easily input seed images and data using buttons or marks made using the touch screen that will allow the user to influence the resulting algorithmic art image generated.
