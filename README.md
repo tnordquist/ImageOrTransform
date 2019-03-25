@@ -38,6 +38,9 @@ The Javadoc HTML for this project has been generated on OSX  with the following 
  ```
 
 ## External Services
+The app consumes the following external service:
+
+[Google Sign-In](https://developers.google.com/identity/sign-in/android/start-integrating)
 
 ## Aesthetic/Cosmetic Improvements
 The following cosmetic changes would improve the appearance of the app: 
@@ -50,6 +53,16 @@ The following cosmetic changes would improve the appearance of the app:
 The app could be extended in the following ways:
 - More transform algorithm choices need to be added.  The app is already structured to allow new algorithms to be added to the app.
 - Allow the user to share favorite transformed images.
+
+## Wireframes
+
+[Main Screen](ImageOrTransform Wire Frame Main Screen.pdf)
+
+[Transform Dialog](docs/ImageOrTransform Transform Wire Frame Dialog Screen.pdf)
+
+[Image Dialog](ImageOrTransform Wire Frame Image Dialog.pdf)
+
+[History Screen](ImageOrTransform Wire Frame History.pdf)
 
 ## User Stories
 
@@ -80,19 +93,4 @@ Links to generated Javadoc HTML pages in repository.
 which requires the user to input information for parameters needed for the particular transform chosen.
     - Once the user has entered the required information and clicked on the on button in the alert dialog, the user is taken back to the main screen to see the change made to the image. The user can also choose to cancel the transform and so returns to the main screen with the image unchanged.
 4. Upon clicking the HISTORY button the user is taken to a recyclerview with a list of urls corresponding to each image that has been transformed. The Android back navigation button returns the user to the main screen.
-
-### What’s the basic functionality of the app?
-The app will allow the user to easily input seed images and data using buttons or marks made using the touch screen that will allow the user to influence the resulting algorithmic art image generated.
-
-### Who would find this fun or useful? 
-
-Anyone interested in the intersection of technology and art.  Anyone interested in artificial intelligence because as software participates independently, to whatever degree, in activities thought only to be human activities, such as art, hints at artificial intelligence.  Anyone who desires a free time activity that sparks the imagination.  Anyone who needs a break to recharge their mental batteries after intense thinking work because the activity keeps the mind interested without taxing the mind.
-
-### Could this app be useful on its own, with no connection to the internet?
-
-Once downloaded the app will contain the algorithms and possible data input features free of need for internet connection.  
-
-### What sort of data would this app use or share if it had a connection to the internet?
-
-It could use emojis and pictures already on the phone to serve as seed images for generating the art.  The app would possibly have the ability to share the final images with others via email or text.
 
