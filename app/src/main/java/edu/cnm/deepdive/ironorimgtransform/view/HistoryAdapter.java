@@ -18,7 +18,6 @@ import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
-  private static final String TAG = "position";
   private List<Image> userImages;
 
   /**

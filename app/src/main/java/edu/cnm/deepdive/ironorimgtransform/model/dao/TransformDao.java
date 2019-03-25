@@ -42,9 +42,9 @@ public interface TransformDao {
 
   /**
    * Selects and returns the single {@link Transform} instance (or null) for the
-   * specified {@link transform_id}.
+   * specified transform_id.
    *
-   * @param Transform desired {@link transform_id} {@link transform_id}.
+   * @param id desired {@link Transform} id.
    * @return {@link Transform} instance if found in database; <code>null</code>
    * otherwise.
    */

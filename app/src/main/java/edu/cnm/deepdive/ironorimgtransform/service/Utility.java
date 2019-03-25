@@ -21,7 +21,7 @@ public class Utility {
   public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 
   /**
-   * This method will check permission at runtime for Marshmallow & greater than Marshmallow
+   * This method will check permission at runtime for Marshmallow %26 greater than Marshmallow
    * version.
    *
    * If current API version is less than Marshmallow, then checkPermission() will return true, which
@@ -30,6 +30,9 @@ public class Utility {
    * If current API version is Marshmallow or greater, and if permission is already granted then the
    * method returns true. Otherwise, the method returns false and will show a dialog box to a user
    * with allow or deny options.
+   * @param context provides the {@link Context}
+   *
+   * @return boolean returns true or false depending on permission.
    */
   @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
   public static boolean checkPermission(final Context context) {

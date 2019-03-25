@@ -41,6 +41,7 @@ public class Transform {
 
   /**
    * Sets the String identifying the {@link Transform} entity.
+   *
    */
   public void setClazz(String clazz) {
     this.clazz = clazz;
