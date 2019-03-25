@@ -1,0 +1,2 @@
+-bootclasspath 
+/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/jre/lib/rt.jar:/opt/android/sdk/platforms/android-21/android.jar -link https://docs.oracle.com/javase/8/docs/api/ -link https://google.github.io/gson/apidocs/ -link https://square.github.io/retrofit/2.x/converter-gson/ -link http://square.github.io/retrofit/2.x/retrofit/ -link https://square.github.io/okhttp/3.x/okhttp/ -linkoffline https://developer.android.com/reference /opt/android/sdk/docs/reference -windowtitle "ImageOrTransform" 

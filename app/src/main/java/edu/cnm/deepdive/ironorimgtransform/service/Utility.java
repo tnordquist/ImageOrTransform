@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.ironorimgtransform.service;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -65,7 +66,15 @@ public class Utility {
         }
         return false;
       } else {
-        return true;
+        if (ContextCompat.checkSelfPermission(context, permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED){
+          ActivityCompat.requestPermissions((Activity) context,
+              new String[]{permission.CAMERA},
+              MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+          return false;
+        }else{
+          return true;
+        }
       }
     } else {
       return true;
