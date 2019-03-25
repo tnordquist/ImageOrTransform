@@ -15,7 +15,7 @@ CREATE  INDEX `index_Transform_detail` ON `Transform` (
 `detail`
 );
 
-"CREATE TABLE IF NOT EXISTS `Image` (
+CREATE TABLE IF NOT EXISTS `Image` (
 `image_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
 `external_url` TEXT, `internal_url` TEXT, 
 `transform_id` INTEGER, 
