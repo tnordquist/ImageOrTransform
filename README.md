@@ -81,7 +81,7 @@ The app could be extended in the following ways:
 
 - As a person who works at a desk all day I found this app and I immediately loved watching the amazing pictures that can be made out of images. I never get tired of see what an image can be changed into. Also, it always helps me relax.
 
-##[Entity Relationship Diagram](docs/erd_version_4.pdf)
+## [Entity Relationship Diagrams](docs/erd_version_4.pdf)
 
     
 ## [DDL](docs/ddl.md) 
@@ -93,11 +93,14 @@ Links to generated Javadoc HTML pages in repository.
 
 ## Instructions for Building the App
 
-1. Clone the repository into a local Android Studio project.
+1. Clone the repository for a local Android Studio project.
 2. The repository is located at [Github](https://github.com/tnordquist/ImageOrTransform)
 3. Go to your IDE and choose check out from version control using Git.
 4. Paste in the url that was copied at the repository.
-5. Build the app onto a device running a minimum of API 21.
+5. To build and run your app, select Run > Run in the menu bar (or click Run  in the toolbar). Android Studio asks you to select a deployment target. Select a device to install and run your app.
+6. When you first create a project, Android Studio creates a default run/debug configuration for the main activity based on the Android App template. To run or debug your project, you must always have at least one run/debug configuration defined. For this reason, it's recommended that you don’t delete the default configuration.
+7. The recommended way to execute any Gradle build is with the help of the Gradle Wrapper (in short just “Wrapper”). The Wrapper is a script that invokes a declared version of Gradle, downloading it beforehand if necessary.
+8. Be sure to build the app onto a device running a minimum of API 21.
 
 ## Instructions for Using the App
 
