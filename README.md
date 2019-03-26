@@ -113,4 +113,4 @@ which requires the user to input information for parameters needed for the parti
 4. Upon clicking the HISTORY button the user is taken to a recyclerview with a list of urls corresponding to each image that has been transformed. The Android back navigation button returns the user to the main screen.
 
 ## License
-[MIT License](LICENSE)
+[MIT License](LICENSE.md)
