@@ -30,7 +30,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Don't worry baout lics stat for com.android but link javadoc needed
+    // Don't worry about lics stat for com.android but link javadoc needed
     // androi.arch don't worry about license but do javadoc link
 
 

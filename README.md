@@ -27,14 +27,23 @@ The Javadoc HTML for this project has been generated on OSX  with the following 
 ## Third Party Libraries
 
  ```
- -bootclasspath /Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/jre/lib/rt.jar:/opt/android/sdk/platforms/android-21/android.jar 
- -link https://docs.oracle.com/javase/8/docs/api/ 
- -link https://google.github.io/gson/apidocs/ 
- -link https://square.github.io/retrofit/2.x/converter-gson/ 
- -link http://square.github.io/retrofit/2.x/retrofit/ 
- -link https://square.github.io/okhttp/3.x/okhttp/ 
- -linkoffline https://developer.android.com/reference /opt/android/sdk/docs/reference 
- -windowtitle "ImageOrTransform"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'org.apache.commons:commons-csv:1.6'
+    implementation 'com.github.deep-dive-coding-java:android-utilities:1.0.3'
+    implementation 'com.github.deep-dive-coding-java:date-utilities:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    testImplementation 'junit:junit:4.12'
+
  ```
 
 ## External Services
