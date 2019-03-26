@@ -71,6 +71,9 @@ The app could be extended in the following ways:
 - As a student I need to make myself take intermittent short breaks while studying and writing programs so that I can rest and recharge my brain. The generative art application let’s me both get my mind off of my studies and to inspire me with what can be done with computer technology.
 
 - As a person who works at a desk all day I found this app and I immediately loved watching the amazing pictures that can be made out of images. I never get tired of see what an image can be changed into. Also, it always helps me relax.
+
+##[Entity Relationship Diagram](docs/erd_version_4.pdf)
+
     
 ## [DDL](docs/ddl.md) 
 
