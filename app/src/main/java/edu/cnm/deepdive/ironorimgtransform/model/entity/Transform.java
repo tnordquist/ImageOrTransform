@@ -120,4 +120,36 @@ public class Transform {
   public void setExample(String example) {
     this.example = example;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    Transform transform = (Transform) o;
+
+    if (!name.equals(transform.name)) {
+      return false;
+    }
+    if (detail != null ? !detail.equals(transform.detail) : transform.detail != null) {
+      return false;
+    }
+    if (example != null ? !example.equals(transform.example) : transform.example != null) {
+      return false;
+    }
+    return clazz != null ? clazz.equals(transform.clazz) : transform.clazz == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = name.hashCode();
+    result = 31 * result + (detail != null ? detail.hashCode() : 0);
+    result = 31 * result + (example != null ? example.hashCode() : 0);
+    result = 31 * result + (clazz != null ? clazz.hashCode() : 0);
+    return result;
+  }
 }

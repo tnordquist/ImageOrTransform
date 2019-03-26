@@ -85,7 +85,10 @@ Links to generated Javadoc HTML pages in repository.
 ## Instructions for Building the App
 
 1. Clone the repository into a local Android Studio project.
-2. Build the app onto a device running a minimum of API 21.
+2. The repository is located at [Github](https://github.com/tnordquist/ImageOrTransform)
+3. Go to your IDE and choose check out from version control using Git.
+4. Paste in the url that was copied at the repository.
+5. Build the app onto a device running a minimum of API 21.
 
 ## Instructions for Using the App
 
