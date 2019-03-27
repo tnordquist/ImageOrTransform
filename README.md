@@ -117,7 +117,9 @@ which requires the user to input information for parameters needed for the parti
     - Once the user has entered the required information and clicked on the on button in the alert dialog, the user is taken back to the main screen to see the change made to the image. The user can also choose to cancel the transform and so returns to the main screen with the image unchanged.
 4. Upon clicking the HISTORY button the user is taken to a recyclerview with a list of urls corresponding to each image that has been transformed. The Android back navigation button returns the user to the main screen.
 
-## Copyright
-[MIT License](LICENSE.md)
+## Copyright & License
+[MIT License ImageOrTransform App](LICENSE.md)
+
+[Apache Commons CSV License](https://www.apache.org/licenses/LICENSE-2.0)
 
 Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com
