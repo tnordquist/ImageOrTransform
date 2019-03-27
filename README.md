@@ -70,13 +70,13 @@ The app could be extended in the following ways:
 
 ## Wireframes
 
-[Main Screen](docs/ImageOrTransform Wire Frame Main Screen.pdf)
+[Main Screen](docs/ImageOrTransformWireFrameMainScreen.pdf)
 
-[Transform Dialog](docs/ImageOrTransform Transform Wire Frame Dialog Screen.pdf)
+[Transform Dialog](docs/ImageOrTransformTransformWireFrameDialogScreen.pdf)
 
-[Image Dialog](docs/ImageOrTransform Wire Frame Image Dialog.pdf)
+[Image Dialog](docs/ImageOrTransformWireFrameImageDialog.pdf)
 
-[History Screen](docs/ImageOrTransform Wire Frame History.pdf)
+[History Screen](docs/ImageOrTransformWireFrameHistory.pdf)
 
 ## User Stories
 
