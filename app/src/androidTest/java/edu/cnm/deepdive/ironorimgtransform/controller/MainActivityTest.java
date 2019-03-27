@@ -30,7 +30,7 @@ public class MainActivityTest {
         .perform(click());
 
     //Make sure fragment is loaded
-    onView(withText("Gaussian Blur"))
+    onView(withText("Stack Blur"))
         .check(matches(isDisplayed()));
   }
 

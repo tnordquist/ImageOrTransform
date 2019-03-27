@@ -60,14 +60,6 @@ public class TransformDaoTest {
     }
     transformDao.insert(transforms);
     Transform[] testApods = transformDao.findAll().toArray(new Transform[0]);
-    /*Arrays.sort(testApods, (transform1, transform2) ->
-        -Integer
-            .compare((int) transform1.getId(),
-                (int) transform2.getId()));
-    Arrays.sort(transforms, (transform1, transform2) ->
-        -Integer
-            .compare((int) transform1.getId(),
-                (int) transform2.getId()));*/
     assertArrayEquals(transforms, testApods);
   }
 

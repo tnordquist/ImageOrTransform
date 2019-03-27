@@ -20,7 +20,11 @@ There are two main deficiencies regarding the completion of this app: the techni
 
 ### Operations
 
-- 
+- UI: Test Transform menu button.
+- UI: Test Image Choice button.
+- Test Transform select and selectAll methods.
+- Delete Transform id and name.
+
 
 This app has been extensively testing on a Samsung tablet, SM-T 380 (Android 8.1.0, API 27).  It has also been testing using the Android Studio Emulator running API 28 on a Nexus 5X emulation.  Minimum API is 21.  At present, there are not any known Android devices that do not support this app, so long as the minimum Android API is met and the user gives the required permissions. The app currently supports english only.
 
