@@ -36,8 +36,8 @@ public interface ImageDao {
   List<Long> insert(Image... images);
 
   /**
-   * Inserts a {@link List} of  {@link Image} instances into the local database. Any primary or unique key
-   * constraint violations will result in the existing records being retained.
+   * Inserts a {@link List} of  {@link Image} instances into the local database. Any primary or
+   * unique key constraint violations will result in the existing records being retained.
    *
    * @param images {@link Image} instance(s) contained in a {@link List}  to be inserted.
    * @return inserted {@link List} of record ID(s).
@@ -46,19 +46,18 @@ public interface ImageDao {
   List<Long> insert(List<Image> images);
 
   /**
-   * Selects and returns the single {@link Image} instance (or null) for the
-   * specified {@link Date}.
+   * Selects and returns the single {@link Image} instance (or null) for the specified {@link
+   * Date}.
    *
    * @param id desired {@link Image}.
-   * @return {@link Image} instance if found in database; <code>null</code>
-   * otherwise.
+   * @return {@link Image} instance if found in database; <code>null</code> otherwise.
    */
   @Query("SELECT * FROM Image WHERE transform_id = :id")
   Image findFirstById(Long id);
 
   /**
-   * Selects and returns all {@link Image} instances in the local database,
-   * sorting the result in descending id order.
+   * Selects and returns all {@link Image} instances in the local database, sorting the result in
+   * descending id order.
    *
    * @return all {@link Image} instances in local database.
    */
@@ -66,8 +65,8 @@ public interface ImageDao {
   List<Image> findAll();
 
   /**
-   * Selects and returns a chosen history {@link Image} instances in the local
-   * database, sorting the result in descending id order.
+   * Selects and returns a chosen history {@link Image} instances in the local database, sorting the
+   * result in descending id order.
    *
    * @return all {@link Image} instances in local database.
    */
@@ -75,9 +74,8 @@ public interface ImageDao {
   List<Image> findHistory(long limit);
 
   /**
-   * Selects and returns all images changed by a particular transform type
-   * {@link Image} instances in the local database, sorting the result in
-   * descending id order.
+   * Selects and returns all images changed by a particular transform type {@link Image} instances
+   * in the local database, sorting the result in descending id order.
    *
    * @return all {@link Image} instances in local database.
    */

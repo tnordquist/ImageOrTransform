@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,7 +40,7 @@ import edu.cnm.deepdive.ironorimgtransform.service.GoogleSignInService;
 /**
  * Primary controller class of the ImageOrTransform app. This activity configures and then responds
  * to clicks on button views at the bottom of the view screen one to display a pop up menu giving
- * option to activate an image tranforming algorithm. The other button view at the bottom of the
+ * option to activate an image transforming algorithm. The other button view at the bottom of the
  * screen responds to a click by displaying an alert dialog which gives the user the option to
  * choose an image stored in the gallery or to use the camera to generate an image to be
  * transformed.  A click of the third button, at the top of the screen, opens an activity which
@@ -137,14 +136,16 @@ public class MainActivity extends AppCompatActivity implements
           .add(transform.getName())
           .setOnMenuItemClickListener((item) -> {
             try {
-              Class<? extends TransformOperation> clazz =
-                  (Class<? extends TransformOperation>) getClass()
-                      .getClassLoader().loadClass(transform.getClazz());
-              TransformOperation operation = clazz.newInstance();
-              DialogFragment dialogFragment = TransformPickerDialogFragment
-                  .newInstance(operation, transform.getId());
-              dialogFragment.show(getSupportFragmentManager(),
-                  dialogFragment.getClass().getSimpleName());
+              if (transform.getClazz()!=null) {
+                Class<? extends TransformOperation> clazz =
+                    (Class<? extends TransformOperation>) getClass()
+                        .getClassLoader().loadClass(transform.getClazz());
+                TransformOperation operation = clazz.newInstance();
+                DialogFragment dialogFragment = TransformPickerDialogFragment
+                    .newInstance(operation, transform.getId());
+                dialogFragment.show(getSupportFragmentManager(),
+                    dialogFragment.getClass().getSimpleName());
+              }
               return true;
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
               e.printStackTrace();
@@ -372,8 +373,6 @@ public class MainActivity extends AppCompatActivity implements
       fo = new FileOutputStream(destination);
       fo.write(bytes.toByteArray());
       fo.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }

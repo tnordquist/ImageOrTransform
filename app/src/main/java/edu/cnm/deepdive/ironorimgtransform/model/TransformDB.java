@@ -105,7 +105,7 @@ public abstract class TransformDB extends RoomDatabase {
 
           Transform transform2 = new Transform();
           transform2.setName("Scale");
-          transform2.setClazz("edu.cnm.deepdive.ironorimgtransform.service.Scale");
+          transform2.setClazz(null);
           getInstance().getTransformDao().insert(transform2);
 
         }

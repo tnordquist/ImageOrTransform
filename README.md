@@ -18,6 +18,10 @@ There are two main deficiencies regarding the completion of this app: the techni
 
 ## Android Version Testing
 
+### Operations
+
+- 
+
 This app has been extensively testing on a Samsung tablet, SM-T 380 (Android 8.1.0, API 27).  It has also been testing using the Android Studio Emulator running API 28 on a Nexus 5X emulation.  Minimum API is 21.  At present, there are not any known Android devices that do not support this app, so long as the minimum Android API is met and the user gives the required permissions. The app currently supports english only.
 
 
@@ -54,6 +58,7 @@ The app consumes the following external service:
 ## Aesthetic/Cosmetic Improvements
 The following cosmetic changes would improve the appearance of the app: 
 - Style the buttons or exchange the buttons with icons.
+- Style the alert dialogs.
 - Move the history button to the top bar of the screen.
 - Style the history list.
 
@@ -112,5 +117,7 @@ which requires the user to input information for parameters needed for the parti
     - Once the user has entered the required information and clicked on the on button in the alert dialog, the user is taken back to the main screen to see the change made to the image. The user can also choose to cancel the transform and so returns to the main screen with the image unchanged.
 4. Upon clicking the HISTORY button the user is taken to a recyclerview with a list of urls corresponding to each image that has been transformed. The Android back navigation button returns the user to the main screen.
 
-## License
+## Copyright
 [MIT License](LICENSE.md)
+
+Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com

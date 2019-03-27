@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import edu.cnm.deepdive.android.BaseFluentAsyncTask.ResultListener;
 import edu.cnm.deepdive.ironorimgtransform.R;
-import edu.cnm.deepdive.ironorimgtransform.model.TransformDB;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.service.TransformDBService.GetHistoryTask;
 import edu.cnm.deepdive.ironorimgtransform.view.HistoryAdapter;
