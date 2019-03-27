@@ -21,7 +21,7 @@ import edu.cnm.deepdive.ironorimgtransform.service.TransformOperation;
 /**
  * Displays an alert dialog which provides user choices for type of transform to be applied to the
  * chosen image.  The dialog presents the user with settings for inputting data needed to determine
- * the way the transform alogorithm will be applied to the image.  The user has the option to click
+ * the way the transform algorithm will be applied to the image.  The user has the option to click
  * on to set the transformation into process or to cancel the transform option chosen.
  */
 public class TransformPickerDialogFragment extends DialogFragment {

@@ -12,7 +12,7 @@ import edu.cnm.deepdive.ironorimgtransform.R;
  * contains the specific algorithm by which the GaussiaBlur functions.  Also, it contains the
  * getLayout() method by which it's appropriate layout is called.
  */
-public class GaussianBlur extends TransformOperation {
+public class StackBlur extends TransformOperation {
 
   private final int TRANS_DEV = 3;
 
@@ -30,7 +30,7 @@ public class GaussianBlur extends TransformOperation {
 
   @Override
   public int getLayout() {
-    return R.layout.fragment_gaussian_blur;
+    return R.layout.fragment_fast_blur;
   }
 
   private Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {

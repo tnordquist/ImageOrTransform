@@ -5,8 +5,8 @@
   android:layout_height="match_parent"
   xmlns:tools="http://schemas.android.com/tools"
   tools:context=".controller.TransformPickerDialogFragment"
-  android:theme="@style/GaussianBlur"
-  style="@style/GaussianBlur">
+  android:theme="@style/FastBlur"
+  style="@style/FastBlur">
 
   <SeekBar
     android:id="@+id/standard_deviation"
