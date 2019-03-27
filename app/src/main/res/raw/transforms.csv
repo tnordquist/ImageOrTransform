@@ -1,2 +1,4 @@
-Gaussian Blur
-Scale
+Gaussian Blur, edu.cnm.deepdive.ironorimgtransform.service.GaussianBlur
+Scale,
+Geometric,
+Rotate,

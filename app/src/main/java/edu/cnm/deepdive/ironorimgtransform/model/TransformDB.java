@@ -7,14 +7,25 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import edu.cnm.deepdive.ironorimgtransform.R;
 import edu.cnm.deepdive.ironorimgtransform.TransformApplication;
 import edu.cnm.deepdive.ironorimgtransform.model.TransformDB.Converters;
 import edu.cnm.deepdive.ironorimgtransform.model.dao.ImageDao;
 import edu.cnm.deepdive.ironorimgtransform.model.dao.TransformDao;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Image;
 import edu.cnm.deepdive.ironorimgtransform.model.entity.Transform;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.Executors;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 /**
  * Defines the local database as a collection of its entities and converters, with the singleton
@@ -92,22 +103,35 @@ public abstract class TransformDB extends RoomDatabase {
 
   private static class Prepopulate extends Callback {
 
+    /**
+     * This method pre-populates the Transform database with id, name, and class name.
+     *
+     * @param db database to which pre-load items will be added
+     */
     @Override
     public void onCreate(@NonNull SupportSQLiteDatabase db) {
       super.onCreate(db);
       Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
         @Override
         public void run() {
-          Transform transform = new Transform();
-          transform.setName("Gaussian Blur");
-          transform.setClazz("edu.cnm.deepdive.ironorimgtransform.service.GaussianBlur");
-          getInstance().getTransformDao().insert(transform);
 
-          Transform transform2 = new Transform();
-          transform2.setName("Scale");
-          transform2.setClazz(null);
-          getInstance().getTransformDao().insert(transform2);
-
+          try (
+              InputStream input = TransformApplication.getInstance().getResources()
+                  .openRawResource(R.raw.transforms);
+              Reader reader = new InputStreamReader(input);
+              CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT.withTrim())
+          ) {
+            List<Transform> transforms = new LinkedList<>();
+            for (CSVRecord record : parser) {
+              Transform transform = new Transform();
+              transform.setName(record.get(0));
+              transform.setClazz(record.get(1).isEmpty() ? null : record.get(1));
+              transforms.add(transform);
+            }
+            getInstance().getTransformDao().insert(transforms);
+          } catch (IOException e) {
+            Log.e("Something went wrong!", getClass().getSimpleName());
+          }
         }
       });
     }
