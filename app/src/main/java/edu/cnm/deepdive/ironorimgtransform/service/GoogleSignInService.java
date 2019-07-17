@@ -6,7 +6,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import edu.cnm.deepdive.ironorimgtransform.TransformApplication;
 
-/*
+/**
 This has been created to be a singleton. The methods in the instance of this class provide for requesting email and id of the user of the app, setting the client and the account for google sign in.
  */
 public class GoogleSignInService {
